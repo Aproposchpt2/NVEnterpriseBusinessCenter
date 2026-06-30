@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title><!-- PLACEHOLDER: business_name -->Your Business Name<!-- /PLACEHOLDER --> — Professional Services</title>
+<meta name="description" content="Flagship Gold Standard website template — the permanent foundation for every AI-generated client site.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sapphire:#0F2A6A;
+  --sapphire-dark:#0a1d4d;
+  --gold:#C9A84C;
+  --white:#FFFFFF;
+  --offwhite:#F8F7F4;
+  --overlay:rgba(10,18,40,0.72);
+  --ink:#1b2238;
+  --muted:#5d6678;
+  --line:#e9e6dd;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;color:var(--ink);background:#fff;line-height:1.65;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+h1,h2,h3,.display{font-family:'Cinzel',serif}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+.section{padding:92px 0}
+.eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+.section-head{text-align:center;max-width:720px;margin:0 auto 52px}
+.section-head h2{font-size:clamp(2rem,4vw,2.9rem);color:var(--sapphire);margin-top:14px;font-weight:700;letter-spacing:.01em}
+
+/* Buttons */
+.btn-gold{display:inline-flex;align-items:center;gap:9px;background:var(--gold);color:var(--sapphire);font-weight:700;font-size:1rem;padding:15px 32px;border-radius:11px;text-decoration:none;border:2px solid var(--gold);transition:transform .25s ease,box-shadow .25s ease;box-shadow:0 6px 20px rgba(201,168,76,.25)}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 0 28px rgba(201,168,76,.8),0 0 12px rgba(201,168,76,.55)}
+.btn-ghost-w{display:inline-flex;align-items:center;gap:8px;color:#fff;font-weight:600;padding:15px 26px;border-radius:11px;text-decoration:none;border:1.5px solid rgba(255,255,255,.55);background:transparent;transition:color .25s,border-color .25s}
+.btn-ghost-w:hover{border-color:var(--gold);color:var(--gold)}
+.btn-sapphire{display:inline-flex;align-items:center;gap:9px;background:var(--sapphire);color:#fff;font-weight:700;padding:15px 32px;border-radius:11px;text-decoration:none;border:2px solid var(--sapphire);transition:transform .25s,box-shadow .25s,background .25s}
+.btn-sapphire:hover{background:var(--sapphire-dark);transform:translateY(-2px);box-shadow:0 12px 30px rgba(10,18,40,.32)}
+.btn-ghost-s{display:inline-flex;align-items:center;gap:8px;color:var(--sapphire);font-weight:700;padding:15px 28px;border-radius:11px;text-decoration:none;border:1.5px solid var(--sapphire);background:transparent;transition:background .25s,color .25s}
+.btn-ghost-s:hover{background:var(--sapphire);color:#fff}
+
+/* Nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--sapphire);transition:box-shadow .25s ease}
+.nav.scrolled{box-shadow:0 6px 24px rgba(10,18,40,.30)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;height:72px;display:flex;align-items:center;justify-content:space-between}
+.brand{font-family:'Cinzel',serif;color:var(--gold);font-weight:700;font-size:1.32rem;letter-spacing:.05em;text-decoration:none}
+.nav-links{display:flex;gap:32px;align-items:center;list-style:none}
+.nav-links a{color:#fff;text-decoration:none;font-weight:500;font-size:.95rem;letter-spacing:.01em;transition:color .2s}
+.nav-links a:hover{color:var(--gold)}
+.nav-toggle{display:none;background:none;border:0;color:#fff;font-size:1.7rem;line-height:1;cursor:pointer;padding:4px}
+
+/* Hero */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+.hero-overlay{position:absolute;inset:0;background:var(--overlay);z-index:2}
+.hero-inner{position:relative;z-index:3;max-width:880px;padding:110px 24px 70px;display:flex;flex-direction:column;align-items:center;gap:22px}
+.hero-h1{color:#fff;font-size:clamp(2.6rem,6.2vw,5rem);font-weight:700;letter-spacing:.045em;line-height:1.05;text-shadow:0 4px 30px rgba(0,0,0,.35)}
+.hero-sub{font-family:'Fraunces',serif;font-style:italic;font-weight:500;color:rgba(255,255,255,.94);font-size:clamp(1.12rem,2.3vw,1.55rem);max-width:640px}
+.hero-cta-row{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:8px}
+
+/* Trust bar */
+.trust{background:var(--sapphire);padding:20px 0}
+.trust-row{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:14px 52px}
+.trust-item{color:#fff;font-size:.95rem;font-weight:500;display:inline-flex;align-items:center;gap:9px;white-space:nowrap}
+.trust-item .i{color:var(--gold)}
+
+/* About */
+.about{background:var(--offwhite)}
+.about-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:58px;align-items:center}
+.about h2{color:var(--sapphire);font-size:clamp(1.9rem,3.6vw,2.7rem);margin-top:14px;display:inline-block}
+.gold-underline{width:76px;height:4px;background:var(--gold);border-radius:3px;margin:18px 0 24px}
+.about p{margin-bottom:16px;color:var(--ink);font-size:1.04rem}
+.about-media img{width:100%;border-radius:16px;box-shadow:0 30px 64px -28px rgba(15,42,106,.6);object-fit:cover;aspect-ratio:4/3}
+
+/* Services */
+.services{background:#fff}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.svc-card{background:#fff;border:1px solid var(--line);border-top:4px solid var(--sapphire);border-radius:14px;padding:32px 28px;box-shadow:0 16px 40px rgba(15,42,106,.07);transition:transform .25s ease,box-shadow .25s ease}
+.svc-card:hover{transform:translateY(-6px);box-shadow:0 28px 58px rgba(15,42,106,.15)}
+.svc-icon{font-size:1.85rem;color:var(--gold);margin-bottom:14px;line-height:1}
+.svc-card h3{font-size:1.24rem;color:var(--sapphire);margin-bottom:11px;font-weight:700}
+.svc-card p{color:var(--muted);font-size:.97rem;margin-bottom:18px}
+.svc-more{color:var(--gold);font-weight:700;text-decoration:none;font-size:.92rem;letter-spacing:.02em;transition:color .2s}
+.svc-more:hover{color:var(--sapphire)}
+
+/* Why choose us */
+.why{background:var(--sapphire);color:#fff}
+.why h2{color:#fff;text-align:center;margin-bottom:50px;font-size:clamp(2rem,4vw,2.9rem)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;text-align:center}
+.stat .num{font-family:'Cinzel',serif;font-size:clamp(2.5rem,5vw,3.5rem);color:var(--gold);font-weight:700;line-height:1}
+.stat .lbl{margin-top:12px;color:rgba(255,255,255,.88);font-size:1.02rem;font-weight:500}
+
+/* Testimonials */
+.testi{background:var(--offwhite)}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.testi-card{position:relative;background:#fff;border-left:3px solid var(--sapphire);border-radius:12px;padding:26px 28px 28px;box-shadow:0 14px 38px rgba(15,42,106,.08)}
+.testi-card .quote{font-family:'Cinzel',serif;font-size:3.2rem;color:var(--gold);line-height:.7;height:26px}
+.testi-text{font-family:'Fraunces',serif;font-style:italic;color:var(--ink);font-size:1.04rem;margin:8px 0 18px}
+.testi-name{color:var(--sapphire);font-weight:700;font-size:1rem}
+.testi-title{color:var(--muted);font-size:.88rem;margin-bottom:10px}
+.stars{color:var(--gold);letter-spacing:3px}
+
+/* CTA band */
+.cta-band{background:var(--gold);text-align:center}
+.cta-band h2{color:var(--sapphire);font-size:clamp(2rem,4vw,2.8rem);margin-bottom:14px}
+.cta-band p{color:var(--sapphire);font-size:1.12rem;font-weight:500;opacity:.92;margin-bottom:28px}
+.cta-row2{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* Footer */
+.footer{background:var(--sapphire);color:#fff;border-top:3px solid var(--gold);padding:62px 0 0}
+.foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1.3fr;gap:44px}
+.foot-brand{font-family:'Cinzel',serif;color:var(--gold);font-size:1.45rem;font-weight:700;margin-bottom:12px}
+.foot-tag{font-family:'Fraunces',serif;font-style:italic;color:rgba(255,255,255,.82);margin-bottom:14px}
+.footer p,.footer li,.footer a,.foot-contact div{color:rgba(255,255,255,.82);font-size:.95rem}
+.foot-col h4{color:#fff;font-family:'Cinzel',serif;font-size:1.06rem;margin-bottom:18px;font-weight:600}
+.foot-links{list-style:none;display:flex;flex-direction:column;gap:11px}
+.foot-links a{text-decoration:none;transition:color .2s}
+.foot-links a:hover{color:var(--gold)}
+.foot-contact div{margin-bottom:11px;display:flex;gap:10px;align-items:flex-start}
+.foot-contact .i{color:var(--gold);flex:0 0 auto}
+.foot-bottom{border-top:1px solid rgba(255,255,255,.14);margin-top:48px;padding:22px 0;text-align:center}
+.foot-bottom p{color:rgba(201,168,76,.82);font-size:.85rem}
+
+/* Scroll reveal */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* Responsive */
+@media(max-width:768px){
+  .section{padding:64px 0}
+  .nav-toggle{display:block}
+  .nav-links{position:absolute;top:72px;left:0;right:0;background:var(--sapphire);flex-direction:column;gap:0;padding:6px 0;transform:scaleY(0);transform-origin:top;transition:transform .22s ease;box-shadow:0 10px 28px rgba(10,18,40,.32)}
+  .nav-links.open{transform:scaleY(1)}
+  .nav-links li{width:100%}
+  .nav-links a{display:block;padding:15px 24px;width:100%}
+  .about-grid{grid-template-columns:1fr;gap:34px}
+  .svc-grid{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr 1fr;gap:34px 20px}
+  .testi-grid{grid-template-columns:1fr}
+  .trust-row{gap:12px 26px}
+  .trust-item{font-size:.85rem}
+  .foot-grid{grid-template-columns:1fr;gap:32px}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#home"><!-- PLACEHOLDER: business_name -->YOUR BUSINESS<!-- /PLACEHOLDER --></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<!-- ===== SECTION 1 — HERO ===== -->
+<section class="hero" id="home">
+  <!-- PLACEHOLDER: hero_image --><img class="hero-bg" src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&q=80" alt=""><!-- /PLACEHOLDER -->
+  <div class="hero-overlay"></div>
+  <div class="hero-inner">
+    <p class="eyebrow"><!-- PLACEHOLDER: eyebrow -->PROFESSIONAL SERVICES · LAS VEGAS, NV<!-- /PLACEHOLDER --></p>
+    <h1 class="hero-h1"><!-- PLACEHOLDER: business_name -->YOUR BUSINESS NAME<!-- /PLACEHOLDER --></h1>
+    <p class="hero-sub"><!-- PLACEHOLDER: subheadline -->A one-line description of what you do and who you serve.<!-- /PLACEHOLDER --></p>
+    <div class="hero-cta-row">
+      <a class="btn-gold" href="#contact"><!-- PLACEHOLDER: hero_cta -->Get Started Today →<!-- /PLACEHOLDER --></a>
+      <a class="btn-ghost-w" href="#about">Learn More ↓</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 2 — TRUST BAR ===== -->
+<section class="trust">
+  <div class="container">
+    <div class="trust-row reveal">
+      <span class="trust-item"><span class="i">✦</span><!-- PLACEHOLDER: trust_1 -->Licensed &amp; Insured<!-- /PLACEHOLDER --></span>
+      <span class="trust-item"><span class="i">✦</span><!-- PLACEHOLDER: trust_2 -->10+ Years Experience<!-- /PLACEHOLDER --></span>
+      <span class="trust-item"><span class="i">✦</span><!-- PLACEHOLDER: trust_3 -->500+ Clients Served<!-- /PLACEHOLDER --></span>
+      <span class="trust-item"><span class="i">✦</span><!-- PLACEHOLDER: trust_4 -->5-Star Rated<!-- /PLACEHOLDER --></span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 3 — ABOUT / VALUE PROPOSITION ===== -->
+<section class="section about" id="about">
+  <div class="container about-grid">
+    <div class="about-text reveal">
+      <p class="eyebrow">ABOUT US</p>
+      <h2><!-- PLACEHOLDER: about_heading -->Who We Are &amp; What We Stand For<!-- /PLACEHOLDER --></h2>
+      <div class="gold-underline"></div>
+      <!-- PLACEHOLDER: about_body -->
+      <p>We are a team of dedicated professionals committed to delivering exceptional results for every client we serve. For over a decade, we have built our reputation on trust, craftsmanship, and an unwavering attention to detail.</p>
+      <p>Our approach is simple: understand your goals, exceed your expectations, and stand behind our work. We treat every project as a partnership, because your success is the truest measure of ours.</p>
+      <p>From first consultation to final delivery, you can count on clear communication, honest guidance, and a standard of quality that speaks for itself.</p>
+      <!-- /PLACEHOLDER -->
+    </div>
+    <div class="about-media reveal">
+      <!-- PLACEHOLDER: about_image --><img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80" alt="About our business"><!-- /PLACEHOLDER -->
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 4 — SERVICES ===== -->
+<section class="section services" id="services">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">OUR SERVICES</p>
+      <h2><!-- PLACEHOLDER: services_heading -->What We Do For You<!-- /PLACEHOLDER --></h2>
+    </div>
+    <div class="svc-grid" data-stagger>
+      <div class="svc-card reveal"><div class="svc-icon">◆</div><h3><!-- PLACEHOLDER: service_1_name -->Service One<!-- /PLACEHOLDER --></h3><p><!-- PLACEHOLDER: service_1_desc -->A clear, benefit-led description of this core service and the problem it solves for your clients.<!-- /PLACEHOLDER --></p><a class="svc-more" href="#contact">Learn More →</a></div>
+      <div class="svc-card reveal"><div class="svc-icon">◆</div><h3><!-- PLACEHOLDER: service_2_name -->Service Two<!-- /PLACEHOLDER --></h3><p><!-- PLACEHOLDER: service_2_desc -->A clear, benefit-led description of this core service and the problem it solves for your clients.<!-- /PLACEHOLDER --></p><a class="svc-more" href="#contact">Learn More →</a></div>
+      <div class="svc-card reveal"><div class="svc-icon">◆</div><h3><!-- PLACEHOLDER: service_3_name -->Service Three<!-- /PLACEHOLDER --></h3><p><!-- PLACEHOLDER: service_3_desc -->A clear, benefit-led description of this core service and the problem it solves for your clients.<!-- /PLACEHOLDER --></p><a class="svc-more" href="#contact">Learn More →</a></div>
+      <div class="svc-card reveal"><div class="svc-icon">◆</div><h3><!-- PLACEHOLDER: service_4_name -->Service Four<!-- /PLACEHOLDER --></h3><p><!-- PLACEHOLDER: service_4_desc -->A clear, benefit-led description of this core service and the problem it solves for your clients.<!-- /PLACEHOLDER --></p><a class="svc-more" href="#contact">Learn More →</a></div>
+      <div class="svc-card reveal"><div class="svc-icon">◆</div><h3><!-- PLACEHOLDER: service_5_name -->Service Five<!-- /PLACEHOLDER --></h3><p><!-- PLACEHOLDER: service_5_desc -->A clear, benefit-led description of this core service and the problem it solves for your clients.<!-- /PLACEHOLDER --></p><a class="svc-more" href="#contact">Learn More →</a></div>
+      <div class="svc-card reveal"><div class="svc-icon">◆</div><h3><!-- PLACEHOLDER: service_6_name -->Service Six<!-- /PLACEHOLDER --></h3><p><!-- PLACEHOLDER: service_6_desc -->A clear, benefit-led description of this core service and the problem it solves for your clients.<!-- /PLACEHOLDER --></p><a class="svc-more" href="#contact">Learn More →</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 5 — WHY CHOOSE US ===== -->
+<section class="section why">
+  <div class="container">
+    <h2 class="reveal"><!-- PLACEHOLDER: why_heading -->Why Clients Choose Us<!-- /PLACEHOLDER --></h2>
+    <div class="stats" data-stagger>
+      <div class="stat reveal"><div class="num"><!-- PLACEHOLDER: stat_1_num -->15+<!-- /PLACEHOLDER --></div><div class="lbl"><!-- PLACEHOLDER: stat_1_label -->Years in Business<!-- /PLACEHOLDER --></div></div>
+      <div class="stat reveal"><div class="num"><!-- PLACEHOLDER: stat_2_num -->500+<!-- /PLACEHOLDER --></div><div class="lbl"><!-- PLACEHOLDER: stat_2_label -->Happy Clients<!-- /PLACEHOLDER --></div></div>
+      <div class="stat reveal"><div class="num"><!-- PLACEHOLDER: stat_3_num -->100%<!-- /PLACEHOLDER --></div><div class="lbl"><!-- PLACEHOLDER: stat_3_label -->Satisfaction Guarantee<!-- /PLACEHOLDER --></div></div>
+      <div class="stat reveal"><div class="num"><!-- PLACEHOLDER: stat_4_num -->24/7<!-- /PLACEHOLDER --></div><div class="lbl"><!-- PLACEHOLDER: stat_4_label -->Support Available<!-- /PLACEHOLDER --></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 6 — TESTIMONIALS ===== -->
+<section class="section testi">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">WHAT OUR CLIENTS SAY</p>
+      <h2><!-- PLACEHOLDER: testimonials_heading -->Trusted by Businesses Like Yours<!-- /PLACEHOLDER --></h2>
+    </div>
+    <div class="testi-grid" data-stagger>
+      <div class="testi-card reveal">
+        <div class="quote">&ldquo;</div>
+        <p class="testi-text"><!-- PLACEHOLDER: testimonial_1_text -->They delivered beyond what we imagined. Professional, responsive, and genuinely invested in our success from day one.<!-- /PLACEHOLDER --></p>
+        <div class="testi-name"><!-- PLACEHOLDER: testimonial_1_name -->Jordan Avery<!-- /PLACEHOLDER --></div>
+        <div class="testi-title"><!-- PLACEHOLDER: testimonial_1_title -->Owner, Acme Holdings<!-- /PLACEHOLDER --></div>
+        <div class="stars">★★★★★</div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="quote">&ldquo;</div>
+        <p class="testi-text"><!-- PLACEHOLDER: testimonial_2_text -->From the first call to the final result, the experience was seamless. I recommend them to everyone I know.<!-- /PLACEHOLDER --></p>
+        <div class="testi-name"><!-- PLACEHOLDER: testimonial_2_name -->Taylor Brooks<!-- /PLACEHOLDER --></div>
+        <div class="testi-title"><!-- PLACEHOLDER: testimonial_2_title -->Director, Summit Group<!-- /PLACEHOLDER --></div>
+        <div class="stars">★★★★★</div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="quote">&ldquo;</div>
+        <p class="testi-text"><!-- PLACEHOLDER: testimonial_3_text -->Quality work, fair pricing, and a team that actually listens. Exactly the partner our business needed.<!-- /PLACEHOLDER --></p>
+        <div class="testi-name"><!-- PLACEHOLDER: testimonial_3_name -->Morgan Reed<!-- /PLACEHOLDER --></div>
+        <div class="testi-title"><!-- PLACEHOLDER: testimonial_3_title -->Founder, Crestline Co.<!-- /PLACEHOLDER --></div>
+        <div class="stars">★★★★★</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 7 — CALL TO ACTION BAND ===== -->
+<section class="section cta-band">
+  <div class="container">
+    <h2 class="reveal"><!-- PLACEHOLDER: cta_heading -->Ready to Get Started?<!-- /PLACEHOLDER --></h2>
+    <p class="reveal"><!-- PLACEHOLDER: cta_subtext -->Contact us today for a free consultation.<!-- /PLACEHOLDER --></p>
+    <div class="cta-row2 reveal">
+      <a class="btn-sapphire" href="#contact">Contact Us Today →</a>
+      <a class="btn-ghost-s" href="tel:+17025550100">Call Us Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 8 — CONTACT / FOOTER ===== -->
+<footer class="footer" id="contact">
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-col reveal">
+        <div class="foot-brand"><!-- PLACEHOLDER: business_name -->YOUR BUSINESS<!-- /PLACEHOLDER --></div>
+        <div class="foot-tag"><!-- PLACEHOLDER: tagline -->Excellence in every detail.<!-- /PLACEHOLDER --></div>
+        <p><!-- PLACEHOLDER: footer_description -->A short closing line about the business — who you serve and the promise you stand behind.<!-- /PLACEHOLDER --></p>
+      </div>
+      <div class="foot-col reveal">
+        <h4>Quick Links</h4>
+        <ul class="foot-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="foot-col foot-contact reveal">
+        <h4>Get In Touch</h4>
+        <div><span class="i">📍</span><span><!-- PLACEHOLDER: contact_address -->123 Business Ave, Las Vegas, NV 89101<!-- /PLACEHOLDER --></span></div>
+        <div><span class="i">📞</span><span><!-- PLACEHOLDER: contact_phone -->(702) 555-0100<!-- /PLACEHOLDER --></span></div>
+        <div><span class="i">✉️</span><span><!-- PLACEHOLDER: contact_email -->hello@yourbusiness.com<!-- /PLACEHOLDER --></span></div>
+        <div><span class="i">🕑</span><span><!-- PLACEHOLDER: contact_hours -->Mon–Fri, 9:00 AM – 6:00 PM<!-- /PLACEHOLDER --></span></div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p>© 2026 <!-- PLACEHOLDER: business_name -->Your Business Name<!-- /PLACEHOLDER -->. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Nav: shadow on scroll + mobile dropdown toggle
+(function(){
+  var nav=document.getElementById('nav'), toggle=document.getElementById('navToggle'), links=document.getElementById('navLinks');
+  window.addEventListener('scroll',function(){ nav.classList.toggle('scrolled', window.scrollY>10); }, {passive:true});
+  toggle.addEventListener('click',function(){ var open=links.classList.toggle('open'); toggle.setAttribute('aria-expanded', open?'true':'false'); });
+  links.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',function(){ links.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); }); });
+})();
+
+// Scroll reveal — fade + rise, with staggered card delays. IntersectionObserver, no libraries.
+(function(){
+  // Stagger: give each child in a [data-stagger] grid an incremental delay.
+  document.querySelectorAll('[data-stagger]').forEach(function(group){
+    Array.prototype.forEach.call(group.children, function(child, i){
+      if(child.classList.contains('reveal')) child.style.transitionDelay = (i*0.1) + 's';
+    });
+  });
+  var reveals = document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){ reveals.forEach(function(el){ el.classList.add('in'); }); return; }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold:0.12, rootMargin:'0px 0px -8% 0px' });
+  reveals.forEach(function(el){ io.observe(el); });
+})();
+</script>
+</body>
+</html>

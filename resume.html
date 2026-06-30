@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Returning Member Sign-In — APROPOS BUSINESS CENTER™</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header class="focus-top"><a class="logo" href="/index.html"><span class="mk">A</span>APROPOS BUSINESS CENTER™</a></header>
+
+<main class="focus-wrap"><div class="panel" style="max-width:540px">
+  <h2>Resume Your Business Journey</h2>
+  <p class="sub">Already a member? Enter your business email and we'll send a secure 6-digit sign-in code.</p>
+  <div id="otpStep1"><div class="field"><label for="otpEmail">Business email</label><input id="otpEmail" type="email" placeholder="e.g. maria@example.com"></div><div class="form-foot"><button class="btn btn-primary" id="otpSendBtn" type="button">Send my sign-in code →</button></div></div>
+  <div id="otpStep2" style="display:none"><div class="field"><label for="otpCode">Enter the 6-digit code we emailed you</label><input id="otpCode" inputmode="numeric" maxlength="6" placeholder="123456"></div><div class="form-foot"><button class="btn btn-primary" id="otpVerifyBtn" type="button">Verify &amp; continue →</button><button class="btn btn-ghost" id="otpResend" type="button">Use a different email</button></div></div>
+  <div class="err" id="otpErr"></div>
+</div></main>
+
+<script src="/app.js"></script>
+<script>
+function otpMsg(t){const e=$('otpErr');e.textContent=t;e.style.display='block';}
+async function otpSend(){const em=($('otpEmail').value||'').trim();$('otpErr').style.display='none';if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){otpMsg('Enter a valid email.');return}const btn=$('otpSendBtn');btn.disabled=true;btn.textContent='Sending…';try{await fetch('/.netlify/functions/member-otp-request',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em})});$('otpStep1').style.display='none';$('otpStep2').style.display='block';$('otpCode').focus();}catch(_){otpMsg('Could not send the code. Try again.');}btn.disabled=false;btn.textContent='Send my sign-in code →';}
+async function otpVerify(){const em=($('otpEmail').value||'').trim();const c=($('otpCode').value||'').trim();$('otpErr').style.display='none';if(!/^\d{6}$/.test(c)){otpMsg('Enter the 6-digit code.');return}const btn=$('otpVerifyBtn');btn.disabled=true;btn.textContent='Verifying…';try{const r=await fetch('/.netlify/functions/member-otp-verify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,code:c})});const d=await r.json();if(!d.ok)throw new Error(d.error||'Invalid code');Store.del('abc_profile');Store.set('abc_member',d.member);window.location.href='/coach.html';}catch(ex){otpMsg(ex.message||'Could not verify. Try again.');btn.disabled=false;btn.textContent='Verify & continue →';}}
+$('otpSendBtn').addEventListener('click',otpSend);
+$('otpVerifyBtn').addEventListener('click',otpVerify);
+$('otpEmail').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();otpSend();}});
+$('otpCode').addEventListener('keydown',e=>{if(e.key==='Enter')otpVerify();});
+$('otpResend').addEventListener('click',()=>{$('otpStep2').style.display='none';$('otpStep1').style.display='block';$('otpErr').style.display='none';$('otpEmail').focus();});
+</script>
+</body>
+</html>

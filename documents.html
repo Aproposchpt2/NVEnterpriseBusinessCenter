@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Generate a Business Document — APROPOS BUSINESS CENTER™</title>
+<meta name="description" content="Draft practical business documents in seconds — NDAs, agreements, proposals, invoices, and more.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="logo" href="/index.html"><span class="mk">A</span>APROPOS BUSINESS CENTER™</a><nav class="nav"><a href="/assessment.html">Assessment</a><a href="/coach.html">AI Coach</a><a href="/subscription.html">Pricing</a><a class="resume" href="/resume.html">Returning Member</a></nav></div></header>
+
+<section class="section"><div class="wrap"><div class="panel" id="docPanel"><h2>Generate a business document.</h2><p class="sub">During your free access, draft practical business documents in seconds.</p><form id="docForm"><div class="grid"><div class="field full"><label for="docType">Which document?</label><select id="docType"><option value="nda">Non-Disclosure Agreement (NDA)</option><option value="operating">LLC Operating Agreement</option><option value="contractor">Independent Contractor Agreement</option><option value="service">Service Agreement / Statement of Work</option><option value="invoice">Professional Invoice</option><option value="proposal">Business Proposal</option><option value="privacy">Website Privacy Policy</option><option value="terms">Website Terms of Service</option><option value="demand">Demand Letter (unpaid invoice)</option></select></div><div class="field"><label for="docBusiness">Your business name</label><input id="docBusiness" placeholder="e.g. Desert Bloom Cleaning LLC"></div><div class="field"><label for="docState">State <span class="h">optional</span></label><input id="docState" placeholder="e.g. Nevada"></div><div class="field full"><label for="docParty">Other party <span class="h">optional</span></label><input id="docParty" placeholder="e.g. Acme Supplies Inc."></div><div class="field full"><label for="docDetails">Details</label><textarea id="docDetails" placeholder="Add amounts, dates, scope, or terms."></textarea></div></div><div class="form-foot"><button type="submit" class="btn btn-primary" id="docBtn">Generate my document →</button><span class="priv">Review before use. Not legal advice.</span></div><div class="err" id="docErr"></div></form><div class="loading" id="docLoading"><div class="loader-box"><div class="spinner"></div><p>Drafting your document…</p></div></div></div><div id="docResults"></div></div></section>
+
+<footer class="footer-brand"><div class="wrap"><div>© 2026 Apropos Group LLC. All rights reserved.</div><div class="footer-platform">AG ENGINEERING OS™ — Precision-Built for Business.<br>Powered by APROPOS BUSINESS CENTER™</div><div class="footer-tag">Guiding Entrepreneurs from Idea to Execution.</div></div></footer>
+
+<script src="/app.js"></script>
+<script>
+// Prefill the business name / state from the member's profile if we have one.
+(function(){const p=Store.get('abc_profile')||Store.get('abc_member');if(p){if(p.businessName&&$('docBusiness'))$('docBusiness').value=p.businessName;if(p.state&&$('docState'))$('docState').value=p.state;}})();
+
+$('docForm').addEventListener('submit',async e=>{e.preventDefault();const err=$('docErr');err.style.display='none';const payload={docType:$('docType').value,businessName:$('docBusiness').value.trim(),state:$('docState').value.trim(),party:$('docParty').value.trim(),details:$('docDetails').value.trim()};if(!payload.businessName){err.textContent='Add your business name to begin.';err.style.display='block';return}$('docForm').style.display='none';$('docLoading').style.display='block';$('docResults').style.display='none';try{const r=await fetch('/.netlify/functions/generate-document',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});const d=await r.json();if(!d.ok)throw new Error(d.error||'Something went wrong.');docRender(d)}catch(ex){$('docLoading').style.display='none';$('docForm').style.display='block';err.textContent=ex.message||'Could not generate your document. Please try again.';err.style.display='block'}});
+
+function docRender(d){$('docLoading').style.display='none';$('docResults').innerHTML=`<div class="dash-head"><div><h2>${escapeHtml(d.docLabel)}</h2><p>For ${escapeHtml(d.businessName)}</p></div><span class="badge">${d.mode==='ai'?'AI Drafted':'Starter Draft'}</span></div><div class="plan">${mdToHtml(d.document)}</div><div class="disc">${escapeHtml(d.disclaimer)}</div><div class="again"><a class="btn btn-ghost" href="#" onclick="window.print();return false;">⎙ Save / print</a><a class="btn btn-ghost" href="#" onclick="location.reload();return false;">↺ New document</a></div>`;$('docResults').style.display='block';$('docResults').scrollIntoView({behavior:'smooth'})}
+</script>
+</body>
+</html>

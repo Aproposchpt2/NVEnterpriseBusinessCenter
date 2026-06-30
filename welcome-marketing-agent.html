@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Welcome — Let's set up your Marketing Agent | Apropos Business Center</title>
+<meta name="robots" content="noindex"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d1f18;--panel:#10241c;--ink:#f3efe3;--ink-2:#b8c6bd;--green:#34d399;--gold:#c79a3e;--line:rgba(255,255,255,.1);--disp:'Fraunces',Georgia,serif;--body:'Inter',sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--body);background:radial-gradient(1200px 600px at 50% -10%,rgba(52,211,153,.10),transparent),var(--bg);color:var(--ink-2);line-height:1.65;min-height:100vh;padding:clamp(28px,6vw,72px) 20px}
+.wrap{max-width:560px;margin:0 auto}
+.badge{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--green);border:1px solid var(--line);border-radius:999px;padding:7px 14px;margin-bottom:22px}
+.badge .dot{width:7px;height:7px;border-radius:50%;background:var(--green)}
+h1{font-family:var(--disp);font-weight:600;font-size:clamp(1.9rem,5vw,2.7rem);color:var(--ink);line-height:1.1;letter-spacing:-.01em;margin-bottom:12px}
+h1 em{font-style:italic;color:var(--green)}
+.lead{font-size:1.02rem;margin-bottom:8px}
+.lead strong{color:var(--ink);font-weight:600}
+.steps{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 30px;font-size:.8rem;color:var(--ink-2)}
+.steps span{border:1px solid var(--line);border-radius:6px;padding:7px 12px}
+.steps b{color:var(--gold)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:clamp(22px,4vw,32px)}
+.card h2{font-family:var(--disp);font-weight:600;font-size:1.25rem;color:var(--ink);margin-bottom:4px}
+.card p.sub{font-size:.88rem;margin-bottom:20px}
+label{display:block;font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);margin:0 0 6px}
+.opt{color:rgba(255,255,255,.3);text-transform:none;letter-spacing:0;font-weight:400}
+input,textarea{width:100%;font-family:var(--body);font-size:.95rem;color:var(--ink);background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:8px;padding:.72rem .85rem;margin-bottom:16px;resize:vertical}
+input:focus,textarea:focus{outline:none;border-color:var(--green)}
+button{width:100%;min-height:52px;background:var(--green);color:#04130c;font-family:var(--body);font-weight:700;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;border:none;border-radius:8px;cursor:pointer;transition:filter .2s}
+button:hover{filter:brightness(1.08)}button:disabled{opacity:.6;cursor:wait}
+.err{color:#f87171;font-size:.84rem;min-height:18px;margin-top:8px;text-align:center}
+.note{font-size:.78rem;color:var(--ink-2);margin-top:14px;line-height:1.6}
+.done{display:none;text-align:center}
+.done .big{font-size:2.4rem;margin-bottom:8px}
+.done h2{font-family:var(--disp);color:var(--ink);font-size:1.5rem;margin-bottom:10px}
+.foot{text-align:center;font-size:.72rem;color:rgba(255,255,255,.3);margin-top:30px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="badge"><span class="dot"></span> Payment received</div>
+  <h1>You're in. Let's put your marketing <em>on autopilot.</em></h1>
+  <p class="lead">Welcome to your <strong>Marketing Agent</strong>. One quick step and we'll start writing and posting for you — every morning, automatically.</p>
+  <div class="steps"><span><b>1.</b> Tell us about your business</span><span><b>2.</b> We connect your page</span><span><b>3.</b> Your first post goes live</span></div>
+
+  <div class="card" id="formCard">
+    <h2>Tell us about your business</h2>
+    <p class="sub">This is what your Marketing Agent will write about. The more specific, the better your posts.</p>
+
+    <label for="bn">Business name</label>
+    <input id="bn" type="text" placeholder="Acme Services LLC">
+
+    <label for="em">Email <span class="opt">(the one you paid with)</span></label>
+    <input id="em" type="email" placeholder="you@yourbusiness.com">
+
+    <label for="ab">What does your business do?</label>
+    <textarea id="ab" rows="3" placeholder="We design and install custom landscaping for homes and businesses across the valley."></textarea>
+
+    <label for="fb">Your Facebook Page link</label>
+    <input id="fb" type="text" placeholder="https://facebook.com/yourbusiness">
+
+    <label for="ws">Website <span class="opt">(optional — where posts send people)</span></label>
+    <input id="ws" type="text" placeholder="https://yourbusiness.com">
+
+    <button id="go">Activate my Marketing Agent →</button>
+    <div class="err" id="err"></div>
+    <p class="note">After you submit, we connect your page and your first post is live within 24 hours. We may reach out to confirm posting access to your Facebook Page.</p>
+  </div>
+
+  <div class="card done" id="doneCard">
+    <div class="big">🐎</div>
+    <h2>Your Marketing Agent is saddling up.</h2>
+    <p>We've got your details. We'll connect your page and your <strong style="color:var(--ink)">first post goes live within 24 hours</strong>. Watch your inbox — we'll confirm the moment it's running.</p>
+    <p class="foot">Questions? jmitchell@aproposgroupllc.com</p>
+  </div>
+
+  <div class="foot">Apropos Business Center · Apropos Group LLC</div>
+</div>
+
+<script>
+'use strict';
+var EP='/.netlify/functions/submit-marketing-onboarding';
+var $=function(id){return document.getElementById(id);};
+// prefill email from ?email= if present
+try{var p=new URLSearchParams(location.search);var e=p.get('email');if(e)$('em').value=e;}catch(_){}
+$('go').addEventListener('click', async function(){
+  var err=$('err');err.textContent='';
+  var bn=$('bn').value.trim(), em=$('em').value.trim().toLowerCase(), ab=$('ab').value.trim(), fb=$('fb').value.trim(), ws=$('ws').value.trim();
+  if(!bn){err.textContent='Please enter your business name.';return;}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){err.textContent='Please enter the email you paid with.';return;}
+  if(!ab){err.textContent='Tell us briefly what your business does.';return;}
+  if(!fb){err.textContent='Please paste your Facebook Page link.';return;}
+  var b=$('go');b.disabled=true;b.textContent='Setting up…';
+  try{
+    var r=await fetch(EP,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({business_name:bn,email:em,about:ab,fb_page:fb,website:ws,session_id:(new URLSearchParams(location.search)).get('session_id')||null})});
+    var d=await r.json();
+    if(!r.ok||!d.ok){throw new Error(d.error||'Something went wrong.');}
+    $('formCard').style.display='none';$('doneCard').style.display='block';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }catch(e){err.textContent=String(e.message||e);b.disabled=false;b.textContent='Activate my Marketing Agent →';}
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Website Preview — APROPOS BUSINESS CENTER™</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--sapphire:#0F2A6A;--goldstd:#C9A84C;--ink:#1b2238}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;background:#eef1f6;color:var(--ink);display:flex;flex-direction:column;min-height:100vh}
+.pv-bar{background:var(--sapphire);color:#fff;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 22px;flex-wrap:wrap;box-shadow:0 4px 18px rgba(10,18,40,.25)}
+.pv-title{font-family:'Cinzel',serif;font-weight:600;letter-spacing:.02em;font-size:1.02rem}
+.pv-title b{color:var(--goldstd);font-weight:700}
+.pv-actions{display:flex;gap:12px;flex-wrap:wrap}
+.pv-btn{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:.9rem;padding:11px 20px;border-radius:10px;cursor:pointer;text-decoration:none;border:2px solid transparent;font-family:'Inter';transition:.2s}
+.pv-gold{background:var(--goldstd);color:var(--sapphire);border-color:var(--goldstd)}
+.pv-gold:hover{box-shadow:0 0 22px rgba(201,168,76,.7)}
+.pv-ghost{background:transparent;color:#fff;border-color:var(--goldstd)}
+.pv-ghost:hover{background:var(--goldstd);color:var(--sapphire)}
+.pv-frame-wrap{flex:1;display:flex;flex-direction:column;padding:18px}
+.pv-frame{flex:1;width:100%;min-height:70vh;border:1px solid #d8deea;border-radius:12px;background:#fff;box-shadow:0 18px 50px rgba(15,42,106,.12)}
+.pv-foot{text-align:center;padding:16px;font-size:.82rem;color:var(--goldstd);font-weight:700;letter-spacing:.02em}
+.pv-empty{margin:auto;text-align:center;color:#54607a;padding:60px 20px}
+.pv-empty a{color:var(--sapphire);font-weight:800}
+/* Modal */
+.pv-modal{position:fixed;inset:0;background:rgba(10,18,40,.6);display:none;align-items:center;justify-content:center;padding:20px;z-index:50}
+.pv-modal.show{display:flex}
+.pv-modal-card{background:#fff;border-top:4px solid var(--goldstd);border-radius:16px;max-width:460px;padding:30px;text-align:center;box-shadow:0 30px 70px rgba(10,18,40,.4)}
+.pv-modal-card h3{font-family:'Cinzel',serif;color:var(--sapphire);font-size:1.4rem;margin-bottom:12px}
+.pv-modal-card p{color:#54607a;margin-bottom:22px;line-height:1.6}
+.pv-modal-close{margin-top:14px;display:inline-block;color:#8893a8;font-size:.85rem;cursor:pointer;text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="pv-bar">
+  <div class="pv-title">Your Website Preview — <b>AG ENGINEERING OS™</b></div>
+  <div class="pv-actions">
+    <button class="pv-btn pv-gold" id="downloadBtn">⬇ Download My Site</button>
+    <button class="pv-btn pv-ghost" id="launchBtn">Launch My Site →</button>
+  </div>
+</div>
+
+<div class="pv-frame-wrap">
+  <iframe class="pv-frame" id="previewFrame" title="Website preview"></iframe>
+</div>
+<div class="pv-foot">Powered by AG ENGINEERING OS™ — Precision-Built for Business.</div>
+
+<div class="pv-modal" id="launchModal">
+  <div class="pv-modal-card">
+    <h3>Ready to go live?</h3>
+    <p>Our team will deploy your site to a professional domain and handle everything for you. This is an add-on service — click below to get started.</p>
+    <a class="pv-btn pv-gold" href="/subscription.html">Request Launch Service →</a>
+    <div class="pv-modal-close" id="modalClose">Maybe later</div>
+  </div>
+</div>
+
+<script src="/app.js"></script>
+<script>
+(function(){
+  var params=new URLSearchParams(location.search);
+  var session=params.get('session')||'';
+  var rec=Store.get('abc_web_'+session)||{};
+  var previewUrl=rec.preview_url||'';
+  var businessName=(rec.business_name||'my').replace(/[^a-zA-Z0-9 _-]/g,'').trim()||'my-business';
+  var frame=document.getElementById('previewFrame');
+
+  if(previewUrl){ frame.src=previewUrl; }
+  else { document.querySelector('.pv-frame-wrap').innerHTML='<div class="pv-empty">We couldn\'t find that preview. <a href="/website-builder.html">Build a new site →</a></div>'; }
+
+  // Download: fetch the generated HTML and save it locally.
+  document.getElementById('downloadBtn').addEventListener('click',function(){
+    if(!previewUrl){ return; }
+    fetch(previewUrl).then(function(r){return r.text();}).then(function(html){
+      var blob=new Blob([html],{type:'text/html'}); var url=URL.createObjectURL(blob);
+      var a=document.createElement('a'); a.href=url; a.download=businessName.replace(/\s+/g,'-')+'-website.html'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    }).catch(function(){ window.open(previewUrl,'_blank','noopener'); });
+  });
+
+  // Launch modal
+  var modal=document.getElementById('launchModal');
+  document.getElementById('launchBtn').addEventListener('click',function(){ modal.classList.add('show'); });
+  document.getElementById('modalClose').addEventListener('click',function(){ modal.classList.remove('show'); });
+  modal.addEventListener('click',function(e){ if(e.target===modal) modal.classList.remove('show'); });
+})();
+</script>
+</body>
+</html>

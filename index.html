@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>APROPOS BUSINESS CENTER™ — AG ENGINEERING OS™</title>
+<meta name="description" content="APROPOS BUSINESS CENTER™ is an online full-service business center powered by AG ENGINEERING OS™. Get an AI business assessment, readiness score, action plan, and a personal AI Business Coach.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+.hero-center{max-width:1000px;margin:0 auto;text-align:center;display:flex;flex-direction:column;align-items:center}
+.hero-center h1{margin-bottom:16px}
+.tagline-band{font-family:var(--disp);font-weight:700;font-size:clamp(1.04rem,2.1vw,1.5rem);color:var(--green2);background:var(--soft);border:1px solid #cfe3d6;border-radius:999px;padding:9px 24px;margin-bottom:22px}
+.hero-center .lede{max-width:680px;margin:0 auto 26px}
+.hero-center .cta-row{justify-content:center}
+.hero-center h1{font-family:'Cinzel',serif;font-weight:600;letter-spacing:.045em;line-height:1.08;width:100%}
+.top .logo{font-family:'Cinzel',serif;font-weight:600;letter-spacing:.02em;font-size:1.04rem}
+
+/* ── Item 1: nav dropdowns + department directory (sapphire/gold house standard; existing green elements untouched) ── */
+:root{--sapphire:#0F2A6A;--goldstd:#C9A84C}
+/* Padding fix: header is position:sticky (in-flow, reserves its own height — full hero already shows on load).
+   scroll-padding-top keeps the sticky header from covering anchored targets, without introducing an empty gap. */
+html{scroll-padding-top:84px}
+/* Nav dropdown — NEW element added alongside existing nav links */
+.nav-dd{position:relative;display:inline-flex}
+.nav-dd-toggle{font-family:var(--body);font-size:.86rem;font-weight:800;color:#fff;background:var(--sapphire);border:1px solid var(--sapphire);border-radius:999px;padding:8px 14px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;line-height:1}
+.nav-dd-toggle .car{font-size:.6rem;transition:transform .15s}
+.nav-dd.open .nav-dd-toggle .car{transform:rotate(180deg)}
+.nav-dd-menu{position:absolute;top:calc(100% + 10px);right:0;min-width:296px;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 22px 56px rgba(15,42,106,.18);padding:8px;display:none;z-index:40}
+.nav-dd-menu a{display:block;font-size:.85rem;font-weight:700;color:var(--sapphire);text-decoration:none;padding:9px 12px;border-radius:9px;border-left:3px solid transparent}
+.nav-dd-menu a:hover{background:#f2f5fc;border-left-color:var(--goldstd)}
+.nav-dd.open .nav-dd-menu{display:block}
+@media(hover:hover) and (min-width:901px){.nav-dd:hover .nav-dd-menu{display:block}}
+@media(max-width:900px){.nav-dd{width:100%}.nav-dd-toggle{width:100%;justify-content:space-between}.nav-dd-menu{position:static;right:auto;min-width:0;width:100%;box-shadow:none;margin-top:6px}}
+/* Department directory — NEW section below hero */
+#departments .eyebrow{color:var(--sapphire)}
+#departments .dot{background:var(--goldstd)}
+.dept-dir-title{font-family:var(--disp);font-weight:700;font-size:clamp(1.5rem,3vw,2.1rem);letter-spacing:-.02em;color:var(--sapphire);margin:12px 0 6px}
+.dept-dir-sub{color:var(--ink2);max-width:660px;margin-bottom:4px}
+.dept-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:24px}
+.dept-card{display:flex;flex-direction:column;background:var(--sapphire);border:1px solid var(--sapphire);border-radius:16px;padding:24px;min-height:200px;scroll-margin-top:90px;box-shadow:0 18px 44px rgba(15,42,106,.10)}
+.dept-card h3{font-family:var(--disp);font-weight:700;font-size:1.2rem;line-height:1.18;color:var(--goldstd);margin-bottom:9px}
+.dept-card p{font-size:.9rem;line-height:1.55;color:rgba(255,255,255,.86);margin-bottom:18px;flex:1}
+.btn-dept{display:inline-flex;align-items:center;justify-content:center;gap:8px;align-self:flex-start;font-family:var(--body);font-weight:800;font-size:.92rem;border-radius:12px;padding:11px 20px;text-decoration:none;background:var(--goldstd);color:var(--sapphire);border:1.5px solid var(--goldstd);transition:.15s}
+.btn-dept:hover{background:transparent;color:var(--goldstd)}
+.btn-dept.muted{background:transparent;color:rgba(255,255,255,.5);border-color:rgba(255,255,255,.3);cursor:default;pointer-events:none}
+@media(max-width:900px){.dept-grid{grid-template-columns:1fr}}
+/* Morgan AI Coach (Item 2) — sapphire/gold chat */
+#morgan-coach .eyebrow{color:var(--sapphire)}
+#morgan-coach .dot{background:var(--goldstd)}
+.morgan-title{font-family:var(--disp);font-weight:700;font-size:clamp(1.5rem,3vw,2.1rem);letter-spacing:-.02em;color:var(--sapphire);margin:12px 0 6px}
+.morgan-sub{color:var(--ink2);max-width:660px;margin-bottom:18px}
+.morgan-card{background:#fff;border:1px solid var(--line);border-top:4px solid var(--sapphire);border-radius:18px;padding:24px;box-shadow:0 18px 44px rgba(15,42,106,.08);max-width:840px}
+.morgan-hd{display:flex;align-items:center;gap:13px;margin-bottom:14px}
+.morgan-av{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--sapphire),#1c47a8);color:var(--goldstd);display:grid;place-items:center;font-family:var(--disp);font-weight:900;font-size:1.2rem;flex:0 0 46px}
+.morgan-name{font-family:var(--disp);font-weight:700;color:var(--sapphire);font-size:1.05rem}
+.morgan-status{font-size:.78rem;color:var(--ink2);font-weight:700}
+.morgan-chat{border:1px solid var(--line);border-radius:14px;background:var(--paper);height:360px;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:12px;margin-bottom:14px}
+.morgan-chat .m{max-width:86%;padding:11px 15px;border-radius:14px;font-size:.95rem;line-height:1.55;word-wrap:break-word}
+.morgan-chat .m.user{align-self:flex-end;background:var(--sapphire);color:#fff;border-bottom-right-radius:4px}
+.morgan-chat .m.bot{align-self:flex-start;background:#fff;border:1px solid var(--line);border-left:3px solid var(--goldstd);border-bottom-left-radius:4px;color:var(--ink)}
+.morgan-chat .m.bot strong{color:var(--sapphire)}
+.morgan-acts{display:flex;flex-wrap:wrap;gap:8px;align-self:flex-start;margin:-2px 0 4px}
+.morgan-act{display:inline-flex;align-items:center;gap:6px;font-family:var(--body);font-weight:800;font-size:.85rem;border-radius:10px;padding:9px 16px;text-decoration:none;border:1.5px solid var(--sapphire);color:var(--sapphire);background:#fff;transition:.15s}
+.morgan-act:hover{background:var(--sapphire);color:#fff}
+.morgan-act.primary{background:var(--goldstd);border-color:var(--goldstd);color:var(--sapphire)}
+.morgan-act.primary:hover{background:transparent;color:var(--sapphire)}
+.morgan-form{display:flex;gap:8px;align-items:center}
+.morgan-form input#morganInput{flex:1;min-width:0;font-family:var(--body);font-size:.95rem;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink)}
+.morgan-form input#morganInput:focus{outline:none;border-color:var(--sapphire)}
+.morgan-clip{background:none;border:0;font-size:1.25rem;cursor:pointer;color:var(--goldstd);padding:2px 4px;line-height:1;transition:.2s;flex:0 0 auto}
+.morgan-clip:hover{color:var(--sapphire)}
+.morgan-doctag{display:inline-flex;align-items:center;gap:10px;background:#f2f5fc;border:1px solid var(--line);border-left:3px solid var(--goldstd);border-radius:9px;padding:7px 11px;font-size:.82rem;color:var(--sapphire);margin-bottom:10px;max-width:100%}
+.morgan-doctag .nm{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:320px}
+.morgan-doctag .rm{background:none;border:0;color:#b23b3b;cursor:pointer;font-weight:800;font-size:.8rem;flex:0 0 auto}
+/* Settings menu (Item 3) — sapphire/gold */
+.nav-gear{background:none;border:0;font-size:1.18rem;cursor:pointer;color:var(--ink);line-height:1;padding:4px 2px;transition:.25s;margin-left:2px}
+.nav-gear:hover{color:var(--sapphire);transform:rotate(35deg)}
+.set-overlay{position:fixed;inset:0;background:rgba(10,18,40,.6);display:none;align-items:flex-start;justify-content:center;padding:30px 16px;z-index:120;overflow-y:auto}
+.set-overlay.show{display:flex}
+.set-panel{background:#fff;width:100%;max-width:600px;border-radius:18px;border-top:4px solid var(--sapphire);box-shadow:0 30px 80px rgba(10,18,40,.42);overflow:hidden;margin:auto}
+.set-head{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;background:var(--sapphire)}
+.set-head h2{font-family:var(--disp);color:var(--goldstd);font-size:1.3rem;margin:0;font-weight:700}
+.set-close{background:none;border:0;color:#fff;font-size:1.25rem;cursor:pointer;line-height:1}
+.set-body{padding:4px 24px 22px;max-height:74vh;overflow-y:auto}
+.set-sec{padding:20px 0;border-bottom:1px solid var(--line2)}
+.set-sec:last-child{border-bottom:0}
+.set-sec h3{font-family:var(--disp);color:var(--sapphire);font-size:1.12rem;margin:0 0 6px;font-weight:700}
+.set-sub{color:var(--ink2);font-size:.88rem;margin-bottom:14px;line-height:1.5}
+.set-row{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:7px 0}
+.set-row label{font-weight:700;color:var(--ink);font-size:.9rem;display:flex;align-items:center}
+.set-row > div{color:var(--ink2);font-size:.92rem;text-align:right}
+.set-row input.set-emailin{font-family:var(--body);font-size:.88rem;padding:8px 10px;border:1px solid var(--line);border-radius:8px;min-width:200px}
+.soon{font-size:.66rem;background:var(--line2);color:var(--ink2);border-radius:999px;padding:2px 8px;margin-left:8px;font-weight:800;letter-spacing:.04em}
+.set-uploadbtn{display:inline-flex;align-items:center;gap:8px;background:var(--sapphire);color:#fff;font-weight:800;font-size:.86rem;padding:10px 18px;border-radius:10px;cursor:pointer;border:2px solid var(--sapphire);transition:.2s}
+.set-uploadbtn:hover{background:#fff;color:var(--sapphire)}
+.set-hint{font-size:.78rem;color:var(--ink2);margin:9px 0 12px}
+.set-files{display:flex;flex-direction:column;gap:8px}
+.set-file{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid var(--line);border-left:3px solid var(--goldstd);border-radius:10px;padding:10px 14px;font-size:.9rem;color:var(--ink)}
+.set-file .del{background:none;border:0;color:#b23b3b;cursor:pointer;font-weight:800;font-size:.82rem}
+.set-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.set-thumb{position:relative;aspect-ratio:1;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:var(--paper)}
+.set-thumb img{width:100%;height:100%;object-fit:cover}
+.set-thumb .del{position:absolute;top:4px;right:4px;background:rgba(10,18,40,.72);color:#fff;border:0;border-radius:6px;width:22px;height:22px;cursor:pointer;font-size:.75rem;line-height:1}
+.toggle{width:46px;height:25px;border-radius:999px;background:var(--line);border:0;position:relative;cursor:pointer;transition:.2s;padding:0;flex:0 0 46px}
+.toggle span{position:absolute;top:3px;left:3px;width:19px;height:19px;border-radius:50%;background:#fff;transition:.2s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.toggle.on{background:var(--sapphire)}
+.toggle.on span{left:24px}
+.toggle.disabled{background:var(--line2);cursor:not-allowed;opacity:.55}
+@media(max-width:600px){.set-grid{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="logo" href="/index.html"><span class="mk">A</span>APROPOS BUSINESS CENTER™</a><nav class="nav"><div class="nav-dd"><button type="button" class="nav-dd-toggle" aria-haspopup="true" aria-expanded="false">Our Departments <span class="car">▾</span></button><div class="nav-dd-menu"><a href="/assessment.html">Business Assessment &amp; Planning</a><a href="/website-builder.html">Website Design Advisory</a><a href="#">Contract Proposal Writing</a><a href="#">Marketing &amp; Promotions Advisory</a><a href="#">Capital &amp; Funding Advisory</a><a href="#">Business Registration Advisory</a></div></div><div class="nav-dd"><button type="button" class="nav-dd-toggle" aria-haspopup="true" aria-expanded="false">Quick Access to Government Contracts <span class="car">▾</span></button><div class="nav-dd-menu"><a href="https://capgenmkt.aproposgroupllc.com" target="_blank" rel="noopener">Federal Contract Opportunities</a><a href="https://nevadastategen.aproposgroupllc.com" target="_blank" rel="noopener">Nevada State Contract Opportunities</a><a href="https://calstategen.aproposgroupllc.com" target="_blank" rel="noopener">California State Contract Opportunities</a></div></div><a href="/subscription.html">Pricing</a><button class="nav-gear" id="navGear" aria-label="Settings" title="Settings">⚙</button></nav></div></header>
+
+<section class="hero">
+  <div class="wrap hero-center">
+    <span class="eyebrow"><span class="dot"></span>An Online Full-Service Business Center</span>
+    <h1>APROPOS BUSINESS CENTER™</h1>
+    <div class="tagline-band">The 24/7, 365-Days-a-Year Online Business Service Center</div>
+    <p class="lede">The Apropos Business Center is powered by AG ENGINEERING OS™ — AI assessment, readiness scoring, action planning, documents, websites, and contract intelligence, with a personal AI Business Coach, all in one membership.</p>
+    <div class="cta-row"><a href="/assessment.html" class="btn btn-primary">Start Free Trial →</a><a href="/resume.html" class="btn btn-ghost">Returning Member</a></div>
+  </div>
+</section>
+
+<section class="section" id="departments"><div class="wrap">
+  <span class="eyebrow"><span class="dot"></span>Our Departments</span>
+  <h2 class="dept-dir-title">Six departments. One business center.</h2>
+  <p class="dept-dir-sub">Step into any department to get the work done — not just advice. Looking for government contracts? They're in the Quick Access menu above.</p>
+  <div class="dept-grid">
+    <div class="dept-card" id="dept-planning"><h3>Business Assessment &amp; Planning</h3><p>Generate your AI-powered business plan from your assessment results.</p><a class="btn-dept" href="/assessment.html">Enter Department →</a></div>
+    <div class="dept-card" id="dept-website"><h3>Website Design Advisory</h3><p>Build your business website with an AI-powered design studio.</p><a class="btn-dept" href="/website-builder.html">Enter Department →</a></div>
+    <div class="dept-card" id="dept-proposals"><h3>Contract Proposal Writing</h3><p>Generate professional government contract proposals with AI assistance.</p><span class="btn-dept muted" aria-disabled="true">Coming Soon</span></div>
+    <div class="dept-card" id="dept-marketing"><h3>Marketing &amp; Promotions Advisory</h3><p>Automate your daily Facebook promotional content with AI.</p><span class="btn-dept muted" aria-disabled="true">Coming Soon</span></div>
+    <div class="dept-card" id="dept-funding"><h3>Capital &amp; Funding Advisory</h3><p>Identify funding sources, grants, and lenders matched to your business stage.</p><a class="btn-dept" href="#">Enter Department →</a></div>
+    <div class="dept-card" id="dept-registration"><h3>Business Registration Advisory</h3><p>Get step-by-step guidance on EIN, LLC formation, licensing, and state registration.</p><a class="btn-dept" href="#">Enter Department →</a></div>
+  </div>
+</div></section>
+
+<section class="section" id="morgan-coach"><div class="wrap">
+  <span class="eyebrow"><span class="dot"></span>Your Business Advisor</span>
+  <h2 class="morgan-title">Meet Morgan</h2>
+  <p class="morgan-sub">Your personal AI Business Advisor — assigned to you, available 24/7. Morgan reviews where you are and walks you into the right department.</p>
+  <div class="morgan-card">
+    <div class="morgan-hd"><div class="morgan-av">M</div><div><div class="morgan-name">Morgan — Your Business Advisor</div><div class="morgan-status" id="morganStatus">Connecting…</div></div></div>
+    <div class="morgan-chat" id="morganChat" aria-live="polite"></div>
+    <div class="morgan-doctag" id="morganDocTag" style="display:none"><span class="nm" id="morganDocName"></span><button type="button" class="rm" id="morganDocRemove" aria-label="Remove document">✕ remove</button></div>
+    <form class="morgan-form" id="morganForm"><button type="button" class="morgan-clip" id="morganClip" aria-label="Attach a document" title="Attach a document (.pdf, .docx, .txt)">📎</button><input id="morganInput" placeholder="Type your message to Morgan…" autocomplete="off"><button class="btn-dept" type="submit">Send</button><input type="file" id="morganFile" accept=".pdf,.docx,.txt" hidden></form>
+  </div>
+</div></section>
+
+<section class="expect"><div class="wrap"><div class="expect-card"><h2>What you'll receive</h2><p class="sub">Before you start, here is exactly what the Business Center will create for you.</p><div class="expect-grid"><div class="expect-item"><b>✓</b> Personalized Business Assessment</div><div class="expect-item"><b>✓</b> Business Readiness Score</div><div class="expect-item"><b>✓</b> Missing Requirements Checklist</div><div class="expect-item"><b>✓</b> First 30 Days Action Plan</div><div class="expect-item"><b>✓</b> Recommended Services</div><div class="expect-item"><b>✓</b> AI Business Coach</div><div class="expect-item"><b>✓</b> Business Plan</div><div class="expect-item"><b>✓</b> 14 Days Free Access</div></div></div></div></section>
+
+<section class="section" id="how"><div class="wrap how"><div class="s"><div class="n">01</div><h4>Simple intake</h4><p>No blurry blank form. We ask what we need and make it easy to answer.</p></div><div class="s"><div class="n">02</div><h4>AI assessment</h4><p>AG ENGINEERING OS™ determines your path: Start, Build, Market, Win Contracts, or Grow.</p></div><div class="s"><div class="n">03</div><h4>Personal coach</h4><p>Your AI Business Coach appears after your assessment and helps move the plan into action.</p></div></div></section>
+
+<section class="section"><div class="wrap"><div class="price-band">
+  <span class="eyebrow" style="background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.3);color:#fff"><span class="dot"></span>Simple, transparent pricing</span>
+  <h2 style="margin-top:14px">One subscription. Every service. <span class="em">$24.99/month.</span></h2>
+  <p>Start free for 14 days — no credit card required to begin. Every tool, your AI Business Coach, and contract intelligence in one membership.</p>
+  <div class="cta-row" style="justify-content:center"><a href="/subscription.html" class="btn btn-ghost">See Subscription Details →</a><a href="/assessment.html" class="btn btn-primary" style="background:#fff;color:var(--green2)">Start Free Trial →</a></div>
+</div></div></section>
+
+<footer class="footer-brand"><div class="wrap"><div>© 2026 Apropos Group LLC. All rights reserved.</div><div class="footer-platform">AG ENGINEERING OS™ — Precision-Built for Business.<br>Powered by APROPOS BUSINESS CENTER™</div><div class="footer-tag">Guiding Entrepreneurs from Idea to Execution.</div><div style="max-width:680px;margin:14px auto 0;font-size:.78rem;color:var(--ink2);line-height:1.7">APROPOS BUSINESS CENTER™ and AG ENGINEERING OS™ are proprietary platforms developed and owned by Apropos Group LLC. Unauthorized reproduction, distribution, or imitation is strictly prohibited.</div></div></footer>
+
+<div class="set-overlay" id="setOverlay">
+  <div class="set-panel">
+    <div class="set-head"><h2>Settings</h2><button class="set-close" id="setClose" aria-label="Close">✕</button></div>
+    <div class="set-body">
+      <section class="set-sec">
+        <h3>Profile</h3>
+        <div class="set-row"><label>Display name</label><div id="setName">—</div></div>
+        <div class="set-row"><label>Business name</label><div id="setBiz">—</div></div>
+        <div class="set-row"><label>Email</label><div id="setEmailWrap">—</div></div>
+      </section>
+      <section class="set-sec">
+        <h3>Upload Your Business Documents</h3>
+        <p class="set-sub">Upload documents for Morgan to reference during your advisory sessions — business plans, financials, contracts, or any relevant files.</p>
+        <label class="set-uploadbtn">＋ Add document<input type="file" id="docInput" accept=".pdf,.docx,.txt,.xlsx" hidden></label>
+        <div class="set-hint" id="docHint">PDF, DOCX, TXT, XLSX · up to 10MB each · 5 files max</div>
+        <div class="set-files" id="docList"></div>
+      </section>
+      <section class="set-sec">
+        <h3>Your Photo Library</h3>
+        <p class="set-sub">Upload photos to use in your website build.</p>
+        <label class="set-uploadbtn">＋ Add photo<input type="file" id="photoInput" accept=".jpg,.jpeg,.png,.webp" hidden></label>
+        <div class="set-hint" id="photoHint">JPG, PNG, WEBP · up to 10MB each · 10 photos max</div>
+        <div class="set-grid" id="photoGrid"></div>
+      </section>
+      <section class="set-sec">
+        <h3>Preferences</h3>
+        <div class="set-row"><label>Theme <span class="soon">COMING SOON</span></label><div class="toggle disabled"><span></span></div></div>
+        <div class="set-row"><label>Email notifications</label><button class="toggle on" id="notifToggle" aria-label="Toggle email notifications"><span></span></button></div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<script src="/app.js"></script>
+<script>
+// Post-checkout welcome banner (Stripe success redirect → /?subscribed=1).
+(function(){try{if(new URLSearchParams(location.search).get('subscribed')==='1'){var b=document.createElement('div');b.style.cssText='position:fixed;left:0;right:0;top:0;z-index:60;background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;text-align:center;padding:14px 18px;font-weight:800;box-shadow:0 8px 24px rgba(16,36,28,.25)';b.innerHTML='🎉 Welcome — your APROPOS Business Center subscription is active. <a href="/resume.html" style="color:#fff;text-decoration:underline">Sign in to your Business Center →</a>';document.body.appendChild(b);document.body.style.paddingTop='54px';}}catch(e){}})();
+// Nav dropdowns ("Our Departments", "Quick Access to Government Contracts") — click-toggle (touch/mobile friendly); desktop hover also opens via CSS.
+(function(){var dds=document.querySelectorAll('.nav-dd');if(!dds.length)return;function closeAll(except){dds.forEach(function(dd){if(dd!==except){dd.classList.remove('open');dd.querySelector('.nav-dd-toggle').setAttribute('aria-expanded','false');}});}dds.forEach(function(dd){var t=dd.querySelector('.nav-dd-toggle');t.addEventListener('click',function(e){e.stopPropagation();var open=dd.classList.toggle('open');t.setAttribute('aria-expanded',open?'true':'false');if(open)closeAll(dd);});dd.querySelectorAll('.nav-dd-menu a').forEach(function(a){a.addEventListener('click',function(){dd.classList.remove('open');t.setAttribute('aria-expanded','false');});});});document.addEventListener('click',function(e){var inside=false;dds.forEach(function(dd){if(dd.contains(e.target))inside=true;});if(!inside)closeAll(null);});document.addEventListener('keydown',function(e){if(e.key==='Escape')closeAll(null);});})();
+// Morgan AI Coach (Item 2) — two-stage advisor. Stage from sessionStorage/OTP signal.
+(function(){
+  var chatEl=document.getElementById('morganChat'); if(!chatEl) return;
+  var member=Store.get('abc_member');   // set after OTP sign-in (resume.html) → returning
+  var profile=Store.get('abc_profile'); // set after assessment (assessment.html) → new client
+  var who=member||profile||null;
+  var stage = member ? 2 : 1;           // returning member → Stage 2 (user leads); else Stage 1 (Morgan leads)
+  var firstName = (who&&who.fullName) ? String(who.fullName).split(' ')[0] : '';
+  var userEmail = (member&&member.email) || (profile&&profile.email) || '';
+  // One growing morgan_sessions row per browser session.
+  var sessionId=Store.get('abc_morgan_sid');
+  if(!sessionId){ sessionId=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():('sid-'+Date.now()+'-'+Math.round(Math.random()*1e9)); Store.set('abc_morgan_sid',sessionId); }
+  // Tailoring context (never fabricated — only what we actually hold).
+  var context='';
+  if(member){ context='Returning member.\nName: '+(member.fullName||'')+'\nBusiness: '+(member.businessName||'')+'\nStage: '+(member.businessStage||'')+'\nReadiness: '+(member.readinessScore||'')+'/100\nServices requested: '+((member.servicesNeeded||[]).join(', ')); }
+  else if(profile){ context='New client (just completed the assessment).\nName: '+(profile.fullName||'')+'\nBusiness: '+(profile.businessName||'')+'\nStage: '+(profile.businessStage||'')+'\nReadiness: '+((profile.readiness&&profile.readiness.total)||'')+'/100\nMissing items: '+((profile.missingItems||[]).join(', '))+'\nPlan summary: '+String(profile.plan||'').slice(0,1500); }
+  else { context='This visitor has not completed an assessment and is not signed in. Do not reference an assessment or score you do not have; invite them to start the free assessment or sign in, and still help with general questions.'; }
+
+  var convo=[];
+  function addMsg(role,text){ var d=document.createElement('div'); d.className='m '+(role==='user'?'user':'bot'); d.innerHTML=(role==='user')?escapeHtml(text):mdInline(text); chatEl.appendChild(d); chatEl.scrollTop=chatEl.scrollHeight; return d; }
+  function renderActions(actions){ if(!Array.isArray(actions)||!actions.length) return; var wrap=document.createElement('div'); wrap.className='morgan-acts'; actions.forEach(function(a){ if(!a||!a.href) return; var b=document.createElement('a'); b.href=a.href; b.className='morgan-act'+(a.primary?' primary':''); if(a.blank){ b.target='_blank'; b.rel='noopener'; } b.textContent=a.label; wrap.appendChild(b); }); chatEl.appendChild(wrap); chatEl.scrollTop=chatEl.scrollHeight; }
+
+  // Exact opener — seeded client-side so the required wording is guaranteed verbatim.
+  var opener;
+  if(member){ opener='Welcome back '+(firstName||'there')+'. What are we working on today?'; document.getElementById('morganStatus').textContent='Returning member session'; }
+  else if(profile){ opener="Hello "+(firstName||'there')+", my name is Morgan. I've been assigned as your personal Business Advisor here at the Apropos Business Center. I've reviewed your assessment and I'm ready to walk you through what I found and where we go from here. Are you ready to get started?"; document.getElementById('morganStatus').textContent='First advisory session'; }
+  else { opener="Hi — I'm Morgan, your AI Business Advisor at the Apropos Business Center. To tailor everything to your business, start your free assessment or sign in as a returning member. I'm happy to answer general questions in the meantime."; document.getElementById('morganStatus').textContent='Start your assessment or sign in for a tailored session'; }
+  addMsg('bot',opener); convo.push({role:'assistant',content:opener});
+  if(!who){ renderActions([{label:'Start Free Assessment →',href:'/assessment.html'},{label:'Returning Member Sign-In →',href:'/resume.html'}]); }
+
+  // Item 4: document attach (paperclip). .txt native; .pdf via pdf.js; .docx via mammoth (loaded on demand).
+  var pendingDoc=null;
+  var docTag=document.getElementById('morganDocTag'), docName=document.getElementById('morganDocName'), fileInput=document.getElementById('morganFile');
+  function clearDoc(){ pendingDoc=null; docTag.style.display='none'; docName.textContent=''; fileInput.value=''; }
+  function loadScript(src){ return new Promise(function(res,rej){ if(document.querySelector('script[src="'+src+'"]')){res();return;} var s=document.createElement('script'); s.src=src; s.onload=res; s.onerror=function(){rej(new Error('load failed'));}; document.head.appendChild(s); }); }
+  function extractDoc(file){
+    var name=(file.name||'').toLowerCase();
+    if(name.endsWith('.txt')) return file.text();
+    if(name.endsWith('.pdf')) return loadScript('https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js').then(function(){ window.pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js'; return file.arrayBuffer(); }).then(function(buf){ return window.pdfjsLib.getDocument({data:buf}).promise; }).then(function(pdf){ var chain=Promise.resolve(''); for(var i=1;i<=pdf.numPages;i++){ (function(n){ chain=chain.then(function(acc){ if(acc.length>18000)return acc; return pdf.getPage(n).then(function(pg){return pg.getTextContent();}).then(function(c){ return acc+c.items.map(function(it){return it.str;}).join(' ')+'\n'; }); }); })(i); } return chain; });
+    if(name.endsWith('.docx')) return loadScript('https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js').then(function(){ return file.arrayBuffer(); }).then(function(buf){ return window.mammoth.extractRawText({arrayBuffer:buf}); }).then(function(r){ return (r&&r.value)||''; });
+    return Promise.reject(new Error('Unsupported file type'));
+  }
+  document.getElementById('morganClip').addEventListener('click',function(){ fileInput.click(); });
+  document.getElementById('morganDocRemove').addEventListener('click',clearDoc);
+  fileInput.addEventListener('change',function(){ var f=fileInput.files[0]; if(!f)return; if(f.size>5*1024*1024){ docName.textContent='File too large — 5MB max.'; docTag.style.display='inline-flex'; pendingDoc=null; return; } docName.textContent='Reading '+f.name+'…'; docTag.style.display='inline-flex'; extractDoc(f).then(function(text){ pendingDoc={name:f.name, text:String(text||'').replace(/\s+/g,' ').trim().slice(0,14000)}; docName.textContent='📄 '+f.name; }).catch(function(){ docName.textContent='Could not read '+f.name+' — try a .txt, .pdf, or .docx.'; pendingDoc=null; }); });
+
+  var busy=false;
+  function send(text){ text=(text||'').trim(); if((!text&&!pendingDoc)||busy) return; if(!text&&pendingDoc) text="I've shared a document — please take a look."; busy=true;
+    var doc=pendingDoc; addMsg('user', text+(doc?'   📎 '+doc.name:'')); convo.push({role:'user',content:text}); var typing=addMsg('bot','…');
+    var payload={messages:convo,stage:stage,firstName:firstName,context:context,sessionId:sessionId,userEmail:userEmail};
+    if(doc){ payload.document_context="I've uploaded a document: "+doc.name+". Here is the content for your reference:\n\n"+doc.text; }
+    clearDoc();
+    fetch('/.netlify/functions/assistant',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
+      .then(function(r){return r.json();})
+      .then(function(d){ var reply=(d&&d.reply)||'…'; typing.innerHTML=mdInline(reply); convo.push({role:'assistant',content:reply}); renderActions(d&&d.actions); })
+      .catch(function(){ typing.textContent='Sorry — I had trouble responding. Please try again.'; })
+      .then(function(){ busy=false; chatEl.scrollTop=chatEl.scrollHeight; });
+  }
+  document.getElementById('morganForm').addEventListener('submit',function(e){ e.preventDefault(); var i=document.getElementById('morganInput'); var v=i.value; i.value=''; send(v); });
+})();
+// Settings menu (Item 3) — profile, document upload, photo library, preferences.
+(function(){
+  var gear=document.getElementById('navGear'); if(!gear) return;
+  var overlay=document.getElementById('setOverlay');
+  var member=Store.get('abc_member'), profile=Store.get('abc_profile'); var who=member||profile||{};
+  var knownEmail=(member&&member.email)||(profile&&profile.email)||'';
+  var typedEmail='';
+  function email(){ return (knownEmail||typedEmail||'').trim().toLowerCase(); }
+  var docList=document.getElementById('docList'), docHint=document.getElementById('docHint'), docInput=document.getElementById('docInput'), docCount=0;
+  var photoGrid=document.getElementById('photoGrid'), photoHint=document.getElementById('photoHint'), photoInput=document.getElementById('photoInput'), photoCount=0;
+
+  function api(payload){ return fetch('/.netlify/functions/member-upload',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}).then(function(r){return r.json();}); }
+  function listFiles(bucket,cb){ if(!email()){cb([]);return;} api({action:'list',bucket:bucket,prefix:email()}).then(function(d){cb((d&&d.files)||[]);}).catch(function(){cb([]);}); }
+  function delFile(bucket,path,cb){ api({action:'delete',bucket:bucket,path:path}).then(function(){cb();}).catch(function(){cb();}); }
+  function upload(bucket,file,hintEl,cb){
+    if(!email()){ hintEl.textContent='Enter your email above to sync your files.'; return; }
+    if(file.size>10*1024*1024){ hintEl.textContent='File too large — 10MB max.'; return; }
+    hintEl.textContent='Uploading '+file.name+'…';
+    api({action:'sign',bucket:bucket,path:email()+'/'+file.name})
+      .then(function(d){ if(!d.ok)throw new Error(d.error||'sign failed'); return fetch(d.uploadUrl,{method:'PUT',body:file,headers:{'content-type':file.type||'application/octet-stream'}}); })
+      .then(function(r){ if(!r.ok)throw new Error('upload failed'); hintEl.textContent=''; cb(); })
+      .catch(function(e){ hintEl.textContent='Upload failed: '+e.message; });
+  }
+  function refreshDocs(){ listFiles('member-documents',function(files){ docCount=files.length; docList.innerHTML=''; files.forEach(function(f){ var row=document.createElement('div'); row.className='set-file'; var nm=document.createElement('span'); nm.textContent='📄 '+f.name; var del=document.createElement('button'); del.className='del'; del.textContent='Delete'; del.addEventListener('click',function(){ delFile('member-documents',f.path,refreshDocs); }); row.appendChild(nm); row.appendChild(del); docList.appendChild(row); }); }); }
+  function refreshPhotos(){ listFiles('website-assets',function(files){ photoCount=files.length; photoGrid.innerHTML=''; files.forEach(function(f){ var t=document.createElement('div'); t.className='set-thumb'; var img=document.createElement('img'); img.src=f.public_url; img.alt=f.name; var del=document.createElement('button'); del.className='del'; del.textContent='✕'; del.addEventListener('click',function(){ delFile('website-assets',f.path,refreshPhotos); }); t.appendChild(img); t.appendChild(del); photoGrid.appendChild(t); }); }); }
+
+  function renderEmail(){ var wrap=document.getElementById('setEmailWrap'); if(knownEmail){ wrap.textContent=knownEmail; } else { wrap.innerHTML=''; var inp=document.createElement('input'); inp.className='set-emailin'; inp.type='email'; inp.placeholder='you@business.com — to sync files'; inp.value=typedEmail; inp.addEventListener('change',function(){ typedEmail=inp.value.trim(); if(email()){ refreshDocs(); refreshPhotos(); } }); wrap.appendChild(inp); } }
+
+  function openSet(){ document.getElementById('setName').textContent=who.fullName||'—'; document.getElementById('setBiz').textContent=who.businessName||'—'; renderEmail(); overlay.classList.add('show'); if(email()){ refreshDocs(); refreshPhotos(); } }
+  gear.addEventListener('click',openSet);
+  document.getElementById('setClose').addEventListener('click',function(){ overlay.classList.remove('show'); });
+  overlay.addEventListener('click',function(e){ if(e.target===overlay) overlay.classList.remove('show'); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') overlay.classList.remove('show'); });
+
+  docInput.addEventListener('change',function(){ var f=docInput.files[0]; if(!f)return; if(docCount>=5){ docHint.textContent='Limit reached — 5 documents max. Delete one to add more.'; docInput.value=''; return; } upload('member-documents',f,docHint,refreshDocs); docInput.value=''; });
+  photoInput.addEventListener('change',function(){ var f=photoInput.files[0]; if(!f)return; if(photoCount>=10){ photoHint.textContent='Limit reached — 10 photos max.'; photoInput.value=''; return; } upload('website-assets',f,photoHint,refreshPhotos); photoInput.value=''; });
+
+  var notif=document.getElementById('notifToggle'); var notifOn=(function(){try{return localStorage.getItem('abc_notif')!=='off';}catch(_){return true;}})();
+  notif.classList.toggle('on',notifOn);
+  notif.addEventListener('click',function(){ notifOn=!notifOn; notif.classList.toggle('on',notifOn); try{localStorage.setItem('abc_notif',notifOn?'on':'off');}catch(_){} });
+})();
+// Desktop: fit the Cinzel wordmark to one dominant line. Mobile: keep the 2-line wrap.
+function fitHeadline(){var h=document.querySelector('.hero-center h1');if(!h)return;if(window.matchMedia('(max-width:759px)').matches){h.style.whiteSpace='normal';h.style.fontSize='';return;}h.style.whiteSpace='nowrap';h.style.fontSize='100px';var avail=h.clientWidth,w=h.scrollWidth||1,size=100*avail/w*0.985;size=Math.max(30,Math.min(size,90));h.style.fontSize=size+'px';}
+window.addEventListener('load',fitHeadline);window.addEventListener('resize',fitHeadline);if(document.fonts&&document.fonts.ready){document.fonts.ready.then(fitHeadline);}
+</script>
+</body>
+</html>

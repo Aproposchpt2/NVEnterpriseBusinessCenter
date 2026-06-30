@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Website Engine — Live Demonstration | Apropos Business Center</title>
+<meta name="description" content="Demonstration: thin customer input elaborated into Platinum promotional copy, rendered in a distinct hand-built template. Fictitious example.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16241d; --forest:#1f4b39; --forest2:#143528; --sand:#f7f2e9; --paper:#fbfaf6;
+    --line:rgba(31,75,57,.15); --line2:rgba(31,75,57,.28); --gold:#b0894a; --goldsoft:#efe3cb;
+    --white:#fff; --muted:#6b7c72; --disp:'Cormorant Garamond',Georgia,serif; --disp2:'Fraunces',Georgia,serif; --body:'Inter',system-ui,sans-serif; --mono:'JetBrains Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0} html{scroll-behavior:smooth}
+  body{font-family:var(--body);background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 26px}
+  a{color:inherit;text-decoration:none}
+  .eyebrow{font-size:.66rem;letter-spacing:.26em;text-transform:uppercase;font-weight:600;font-family:var(--body)}
+
+  /* ---------- PART A: behind-the-scenes demo band ---------- */
+  .demo{background:#0f1a15;color:#dfe7e1;padding:46px 0 52px;border-bottom:3px solid var(--gold)}
+  .demo .eyebrow{color:var(--gold);margin-bottom:16px;display:block}
+  .demo h1{font-family:var(--disp2);font-weight:500;font-size:clamp(1.6rem,3.3vw,2.5rem);line-height:1.12;color:#fff;letter-spacing:-.01em;max-width:760px;margin-bottom:8px}
+  .demo .note{color:#8fa298;font-size:.92rem;max-width:680px;margin-bottom:26px}
+  .demo-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .dcard{border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:22px;background:rgba(255,255,255,.03)}
+  .dcard .tag{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:#8fa298;margin-bottom:12px;display:flex;align-items:center;gap:9px}
+  .dcard .tag b{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:.7rem;background:#26382f;color:#cfe0d6}
+  .dcard.out .tag b{background:var(--gold);color:#231a06}
+  .raw{font-family:var(--mono);font-size:.86rem;color:#bcccc2;line-height:1.7;white-space:pre-wrap}
+  .out h3{font-family:var(--disp);font-size:1.55rem;color:#fff;line-height:1.15;margin-bottom:8px;font-weight:600}
+  .out p{color:#c7d4cc;font-size:.96rem;margin-bottom:12px}
+  .out .svc{border-top:1px solid rgba(255,255,255,.12);padding-top:11px;font-size:.9rem;color:#9fb1a7}
+  .out .svc b{color:#fff;font-weight:600}
+  .demo-foot{margin-top:24px;display:flex;align-items:center;gap:14px;color:#8fa298;font-size:.9rem}
+  .demo-foot .arrow{font-size:1.3rem;color:var(--gold)}
+
+  /* ---------- PART B: the Platinum site ---------- */
+  .site{background:var(--paper)}
+  .snav{position:sticky;top:0;z-index:40;background:rgba(251,250,246,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .snav .wrap{min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+  .brand{font-family:var(--disp);font-size:1.5rem;font-weight:600;letter-spacing:.01em;display:flex;align-items:center;gap:11px}
+  .brand .leaf{width:30px;height:30px;border-radius:50%;background:var(--forest);color:var(--sand);display:grid;place-items:center;font-size:.95rem}
+  .snav nav{display:flex;align-items:center;gap:26px}
+  .snav nav a{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--muted)}
+  .snav nav a:hover{color:var(--forest)}
+  .book{background:var(--forest);color:var(--sand)!important;padding:11px 20px;border-radius:999px;font-size:.72rem!important;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
+  .book:hover{background:var(--forest2)}
+
+  .hero{position:relative;overflow:hidden;background:linear-gradient(180deg,var(--sand),var(--paper))}
+  .hero:before{content:"";position:absolute;right:-180px;top:-120px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(176,137,74,.16),transparent 65%)}
+  .hero:after{content:"";position:absolute;left:-160px;bottom:-200px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(31,75,57,.10),transparent 64%)}
+  .hero .wrap{position:relative;padding:clamp(60px,9vw,118px) 26px clamp(48px,6vw,80px);text-align:center;max-width:920px}
+  .hero .kicker{color:var(--gold);margin-bottom:24px;display:inline-block}
+  .hero h1{font-family:var(--disp);font-weight:600;font-size:clamp(2.5rem,6vw,4.6rem);line-height:1.0;letter-spacing:-.02em;margin-bottom:14px}
+  .hero h1 em{font-style:italic;color:var(--forest)}
+  .hero .hero-sub{font-family:var(--disp);font-style:italic;font-weight:500;font-size:clamp(1.42rem,3vw,2.2rem);color:var(--forest);line-height:1.18;max-width:640px;margin:0 auto 16px}
+  .hero .lede{font-size:clamp(1rem,1.6vw,1.18rem);color:var(--ink);opacity:.78;max-width:560px;margin:0 auto 32px;font-weight:300}
+  .hero .ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;justify-content:center;font-weight:600;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;padding:16px 30px;border-radius:999px;border:1.5px solid var(--forest);transition:.18s;cursor:pointer}
+  .btn.solid{background:var(--forest);color:var(--sand)}
+  .btn.solid:hover{background:var(--forest2);transform:translateY(-2px)}
+  .btn.ghost{background:transparent;color:var(--forest)}
+  .btn.ghost:hover{background:var(--forest);color:var(--sand)}
+
+  .trust{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--white)}
+  .trust .wrap{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 48px;padding:22px 26px}
+  .trust span{font-size:.82rem;letter-spacing:.04em;color:var(--muted);font-weight:500;display:flex;align-items:center;gap:9px}
+  .trust span:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--gold)}
+
+  .sec{padding:clamp(64px,8vw,108px) 0}
+  .sec .head{max-width:680px;margin:0 auto 52px;text-align:center}
+  .sec .head .eyebrow{color:var(--gold);margin-bottom:16px;display:block}
+  .sec .head h2{font-family:var(--disp);font-weight:600;font-size:clamp(2rem,4vw,3rem);line-height:1.08;letter-spacing:-.01em;margin-bottom:14px}
+  .sec .head p{color:var(--muted);font-size:1.05rem}
+
+  .svcs{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+  .svc-card{background:var(--white);padding:38px 32px;transition:.2s}
+  .svc-card:hover{background:var(--sand)}
+  .svc-card .num{font-family:var(--disp2);font-size:.9rem;color:var(--gold);font-weight:600;letter-spacing:.1em}
+  .svc-card h3{font-family:var(--disp);font-size:1.7rem;font-weight:600;margin:14px 0 12px;line-height:1.12}
+  .svc-card p{color:var(--muted);font-size:.98rem;line-height:1.65}
+
+  .why{background:var(--forest);color:var(--sand)}
+  .why .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(34px,6vw,80px);align-items:center;padding:clamp(64px,8vw,104px) 26px}
+  .why .eyebrow{color:var(--gold);margin-bottom:18px;display:block}
+  .why h2{font-family:var(--disp);font-weight:500;font-size:clamp(2rem,4vw,3.1rem);line-height:1.08}
+  .why h2 em{font-style:italic;color:#e7d4ad}
+  .why-list{display:grid;gap:2px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.12);border-radius:14px;overflow:hidden}
+  .why-item{background:var(--forest);padding:22px 24px;display:flex;gap:16px;align-items:flex-start}
+  .why-item .mk{font-family:var(--disp2);color:var(--gold);font-size:1.1rem;font-weight:700;flex:0 0 auto;line-height:1.4}
+  .why-item b{display:block;font-size:1.06rem;margin-bottom:3px}
+  .why-item span{color:#bcccc2;font-size:.92rem}
+
+  .about .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(34px,6vw,72px);align-items:center}
+  .about .panel{background:var(--sand);border:1px solid var(--line);border-radius:18px;padding:clamp(30px,4vw,46px)}
+  .about .eyebrow{color:var(--gold);margin-bottom:16px;display:block}
+  .about h2{font-family:var(--disp);font-weight:600;font-size:clamp(2rem,3.6vw,2.8rem);line-height:1.1;margin-bottom:18px}
+  .about p{color:var(--ink);opacity:.84;font-size:1.05rem;margin-bottom:14px;font-weight:300}
+  .about .sig{font-family:var(--disp);font-style:italic;font-size:1.4rem;color:var(--forest);margin-top:8px}
+  .about .stat-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .stat{border:1px solid var(--line);border-radius:14px;padding:26px;text-align:center;background:var(--white)}
+  .stat b{display:block;font-family:var(--disp2);font-size:2.6rem;font-weight:600;color:var(--forest);line-height:1}
+  .stat span{font-size:.82rem;letter-spacing:.05em;color:var(--muted);text-transform:uppercase}
+
+  .praise{background:var(--white);border-top:1px solid var(--line)}
+  .praise-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .quote{border:1px solid var(--line);border-radius:16px;padding:30px}
+  .quote .stars{color:var(--gold);letter-spacing:.18em;font-size:.86rem;margin-bottom:14px}
+  .quote p{font-family:var(--disp);font-size:1.28rem;line-height:1.4;font-weight:500;margin-bottom:16px}
+  .quote .by{font-size:.84rem;color:var(--muted);font-weight:600}
+
+  .endcta{background:linear-gradient(135deg,var(--forest2),var(--forest));color:var(--sand);text-align:center}
+  .endcta .wrap{padding:clamp(64px,8vw,104px) 26px}
+  .endcta .eyebrow{color:var(--gold);margin-bottom:18px;display:block}
+  .endcta h2{font-family:var(--disp);font-weight:500;font-size:clamp(2.2rem,5vw,3.6rem);line-height:1.05;margin-bottom:14px}
+  .endcta h2 em{font-style:italic;color:#e7d4ad}
+  .endcta p{opacity:.82;max-width:520px;margin:0 auto 30px;font-weight:300}
+  .endcta .btn.solid{background:var(--sand);color:var(--forest2);border-color:var(--sand)}
+  .endcta .btn.solid:hover{background:#fff}
+
+  .foot{background:#0f1a15;color:#9fb1a7;padding:56px 0 30px}
+  .foot .grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:30px;padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,.12)}
+  .foot .brand{color:#fff;margin-bottom:12px}
+  .foot .brand .leaf{background:var(--gold);color:#231a06}
+  .foot p{font-size:.92rem;line-height:1.7}
+  .foot h4{font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;font-weight:700}
+  .foot a{display:block;font-size:.92rem;color:#bcccc2;padding:4px 0}
+  .foot a:hover{color:#fff}
+  .foot .legal{padding-top:22px;font-size:.78rem;color:#6b7c72;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+  @media(max-width:900px){
+    .demo-grid,.svcs,.why .wrap,.about .wrap,.praise-grid,.foot .grid{grid-template-columns:1fr}
+    .snav nav{display:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ PART A — BEHIND THE SCENES ============ -->
+<section class="demo"><div class="wrap">
+  <span class="eyebrow">AG ENGINEERING OS™ · Website Engine — Live Demonstration (fictitious example)</span>
+  <h1>Two flat sentences in. A Platinum promotional presence out.</h1>
+  <p class="note">The customer types plain facts. The agent doesn't transcribe them — it <em>elaborates</em> them into copy a professional would charge thousands for, then pours it into a distinct, hand-built template. Here's the same business, both sides.</p>
+  <div class="demo-grid">
+    <div class="dcard">
+      <div class="tag"><b>1</b> What the customer typed</div>
+      <div class="raw">Desert Bloom Cleaning.
+I clean houses in Las Vegas.
+5 years. Reliable, thorough.
+Eco-friendly products.
+Same-day booking.</div>
+    </div>
+    <div class="dcard out">
+      <div class="tag"><b>2</b> What the agent elaborated</div>
+      <h3>Come home to spotless — without lifting a finger.</h3>
+      <p>Eco-friendly, same-day home cleaning across Las Vegas. Done right the first time, by a team you'll actually trust in your home.</p>
+      <div class="svc"><b>Recurring Cleaning</b> — "Reclaim your weekends. We keep your home effortlessly spotless on a schedule that fits your life."</div>
+    </div>
+  </div>
+  <div class="demo-foot"><span class="arrow">↓</span> The same facts, rendered into a distinct Platinum template below — <b style="color:#cfe0d6">not a recolored stock theme.</b></div>
+</div></section>
+
+<!-- ============ PART B — THE PLATINUM SITE ============ -->
+<div class="site">
+
+  <header class="snav"><div class="wrap">
+    <a class="brand" href="#"><span class="leaf">❀</span> Desert Bloom</a>
+    <nav>
+      <a href="#services">Services</a>
+      <a href="#why">Why Us</a>
+      <a href="#about">About</a>
+      <a href="#praise">Reviews</a>
+      <a class="book" href="#book">Book Now</a>
+    </nav>
+  </div></header>
+
+  <section class="hero"><div class="wrap">
+    <span class="eyebrow kicker">Eco-friendly home cleaning · Las Vegas</span>
+    <h1>Desert Bloom <em>Cleaning</em></h1>
+    <p class="hero-sub">Come home to spotless — without lifting a finger.</p>
+    <p class="lede">Same-day, eco-friendly home cleaning done right the first time — by a vetted team you'll actually trust in your home.</p>
+    <div class="ctas">
+      <a class="btn solid" href="#book">Book your same-day clean</a>
+      <a class="btn ghost" href="#services">See what's included</a>
+    </div>
+  </div></section>
+
+  <div class="trust"><div class="wrap">
+    <span>5 years in business</span>
+    <span>2,000+ homes cleaned</span>
+    <span>Eco-certified products</span>
+    <span>Same-day booking</span>
+    <span>Background-checked team</span>
+  </div></div>
+
+  <section class="sec" id="services"><div class="wrap">
+    <div class="head">
+      <span class="eyebrow">What we do</span>
+      <h2>A cleaner home, on your terms.</h2>
+      <p>Pick the rhythm that fits your life — we handle the rest, down to the baseboards.</p>
+    </div>
+    <div class="svcs">
+      <div class="svc-card">
+        <div class="num">01</div>
+        <h3>Recurring Cleaning</h3>
+        <p>Reclaim your weekends. We keep your home effortlessly spotless on a weekly, bi-weekly, or monthly rhythm that fits your life — same trusted team, every visit.</p>
+      </div>
+      <div class="svc-card">
+        <div class="num">02</div>
+        <h3>Deep Cleans</h3>
+        <p>Top to bottom, baseboards to ceiling fans. The full reset your home has been waiting for — the kind you feel the moment you walk in.</p>
+      </div>
+      <div class="svc-card">
+        <div class="num">03</div>
+        <h3>Move-In / Move-Out</h3>
+        <p>Hand over the keys — or pick yours up — with a home that's flawless and inspection-ready, so your deposit (and your first impression) stays intact.</p>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="why" id="why"><div class="wrap">
+    <div>
+      <span class="eyebrow">Why Desert Bloom</span>
+      <h2>Trusted in <em>two thousand</em> Las Vegas homes — for good reason.</h2>
+    </div>
+    <div class="why-list">
+      <div class="why-item"><span class="mk">✦</span><div><b>Safe for kids &amp; pets</b><span>Eco-certified, low-tox products — a fresh home without the harsh chemical smell.</span></div></div>
+      <div class="why-item"><span class="mk">✦</span><div><b>A team you can trust</b><span>Every cleaner is vetted and background-checked. The same faces, the same standard.</span></div></div>
+      <div class="why-item"><span class="mk">✦</span><div><b>Same-day when you need it</b><span>Surprise guests? Move-out deadline? Book in the morning, sparkle by the evening.</span></div></div>
+      <div class="why-item"><span class="mk">✦</span><div><b>Spotless, guaranteed</b><span>If a detail isn't right, we come back and make it right. No questions.</span></div></div>
+    </div>
+  </div></section>
+
+  <section class="sec about" id="about"><div class="wrap">
+    <div class="panel">
+      <span class="eyebrow">Our story</span>
+      <h2>A clean home should give you time back — not take it.</h2>
+      <p>Desert Bloom started with one belief: the hours you spend scrubbing are hours you'll never get back with the people who matter.</p>
+      <p>Five years and two thousand homes later, that's still the whole point. We show up on time, treat your home like our own, and hand it back to you spotless — so you can get back to your life.</p>
+      <div class="sig">— The Desert Bloom team</div>
+    </div>
+    <div class="stat-row">
+      <div class="stat"><b>2,000+</b><span>Homes cleaned</span></div>
+      <div class="stat"><b>5 yrs</b><span>In business</span></div>
+      <div class="stat"><b>100%</b><span>Eco-certified</span></div>
+      <div class="stat"><b>Same-day</b><span>Availability</span></div>
+    </div>
+  </div></section>
+
+  <section class="sec praise" id="praise"><div class="wrap">
+    <div class="head">
+      <span class="eyebrow">Kind words</span>
+      <h2>The kind of clean people tell their friends about.</h2>
+    </div>
+    <div class="praise-grid">
+      <div class="quote"><div class="stars">★★★★★</div><p>"I walked in and actually exhaled. It's the first time my house has felt brand new in years."</p><div class="by">Maria T. · Summerlin</div></div>
+      <div class="quote"><div class="stars">★★★★★</div><p>"Booked at 9am, spotless by 5. Same team every visit, and they're wonderful with my dogs."</p><div class="by">Devon R. · Henderson</div></div>
+      <div class="quote"><div class="stars">★★★★★</div><p>"Got my entire deposit back on the move-out clean. Worth every penny — I'll never scrub again."</p><div class="by">Priya N. · Las Vegas</div></div>
+    </div>
+    <p style="text-align:center;color:var(--muted);font-size:.78rem;margin-top:24px">Illustrative reviews shown for this demonstration.</p>
+  </div></section>
+
+  <section class="endcta" id="book"><div class="wrap">
+    <span class="eyebrow">Ready when you are</span>
+    <h2>Your <em>spotless</em> home is one click away.</h2>
+    <p>Same-day booking across the Las Vegas valley. Tell us your home, pick a time — we'll handle the rest.</p>
+    <a class="btn solid" href="#">Book your same-day clean →</a>
+  </div></section>
+
+  <footer class="foot"><div class="wrap">
+    <div class="grid">
+      <div>
+        <div class="brand" style="font-family:var(--disp);font-size:1.5rem"><span class="leaf">❀</span> Desert Bloom Cleaning</div>
+        <p>Eco-friendly home cleaning across the Las Vegas valley. Spotless homes, time back in your life.</p>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <p>1234 Bloom Avenue<br>Las Vegas, NV 89101<br>Mon–Sat · 7am–7pm</p>
+      </div>
+      <div>
+        <h4>Book</h4>
+        <a href="#">(702) 555-0148</a>
+        <a href="#">hello@desertbloom.example</a>
+        <a href="#book">Same-day booking →</a>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 Desert Bloom Cleaning · Fictitious business for demonstration.</span>
+      <span>Built by the Apropos Business Center Website Engine.</span>
+    </div>
+  </div></footer>
+
+</div>
+</body>
+</html>

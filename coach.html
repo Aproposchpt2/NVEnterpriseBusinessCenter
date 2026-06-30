@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Morgan’s Office — APROPOS BUSINESS CENTER™</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+.focus-wrap{align-items:flex-start;padding-top:34px;padding-bottom:34px}
+.assistant.morgan-office{width:min(96vw,1080px)!important;max-width:1080px!important}
+.assistant.morgan-office .chat{height:62vh;min-height:560px;max-height:760px;scroll-padding-top:18px}
+.assistant.morgan-office .msg{font-size:1rem;line-height:1.62}
+@media(max-width:800px){.assistant.morgan-office .chat{height:64vh;min-height:440px}.focus-wrap{padding-top:20px}}
+</style>
+</head>
+<body>
+<header class="focus-top"><a class="logo" href="/index.html"><span class="mk">A</span>APROPOS BUSINESS CENTER™</a></header>
+
+<main class="focus-wrap"><div class="assistant morgan-office" id="assistant">
+  <div class="hd"><div class="av">M</div><div><h2>Morgan’s Office</h2><div class="status" id="asstStatus">Loading your profile…</div></div></div>
+  <div class="suggest" id="suggest"><button data-q="What should I focus on first?">What should I focus on first?</button><button data-q="How do I improve my readiness score?">Improve my score</button><button data-q="How do I get customers?">Get customers</button><button data-q="I'm pursuing State and Federal Contracts">Find contracts</button></div>
+  <div class="chat" id="chat"></div>
+  <form class="chatform" id="chatForm"><input id="chatInput" placeholder="Ask Morgan your post-assessment question…" autocomplete="off"><button class="btn btn-primary" type="submit">Send</button></form>
+</div></main>
+
+<script src="/app.js"></script>
+<script>
+let convo=[];let asstContext='';let morganStage=2;let morganUserEmail='';let morganFirstName='';const chatEl=$('chat');
+function getMorganSessionId(){let id='';try{id=sessionStorage.getItem('nebc_morgan_session_id')||'';if(!id){const seed=(crypto&&crypto.randomUUID)?crypto.randomUUID():(Date.now().toString(36)+'-'+Math.random().toString(36).slice(2));id='morgan-'+seed;sessionStorage.setItem('nebc_morgan_session_id',id)}}catch(_){id='morgan-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2)}return id}
+const morganSessionId=getMorganSessionId();
+function firstNameFrom(obj){const n=String((obj&&(obj.fullName||obj.full_name))||'').trim();return n?n.split(/\s+/)[0]:''}
+function emailFrom(obj){return String((obj&&(obj.email||obj.userEmail||obj.user_email))||'').trim().toLowerCase()}
+function addMsg(role,text){const div=document.createElement('div');div.className='msg '+(role==='user'?'user':'bot');div.innerHTML=role==='user'?escapeHtml(text):mdInline(text);chatEl.appendChild(div);if(role==='user'){div.scrollIntoView({behavior:'smooth',block:'start'});}else{chatEl.scrollTop=chatEl.scrollHeight;}return div}
+
+function openModule(href){const h=resolveHref(href);if(/^https?:/i.test(h)){window.open(h,'_blank','noopener');return}if(/^mailto:/i.test(h)){window.location.href=h;return}if(h==='/coach.html'||h==='#'){$('chatInput').focus();return}window.location.href=h;}
+function renderActions(actions){if(!Array.isArray(actions)||!actions.length)return;const wrap=document.createElement('div');wrap.style.cssText='display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 8px';actions.forEach(a=>{if(!a||!a.href)return;const addon=a.kind==='addon';const btn=document.createElement('a');const h=resolveHref(a.href);btn.href=h;btn.className='btn '+(addon?'btn-ghost':'btn-primary');btn.style.cssText='font-size:13px;padding:8px 14px';btn.textContent=(addon?'✦ ':'→ ')+a.label+(addon?' · add-on':'');btn.addEventListener('click',e=>{e.preventDefault();openModule(a.href)});wrap.appendChild(btn)});chatEl.appendChild(wrap);chatEl.scrollTop=chatEl.scrollHeight}
+
+async function sendMsg(text){text=(text||'').trim();if(!text)return;addMsg('user',text);convo.push({role:'user',content:text});const typing=addMsg('bot','…');try{const payload={messages:convo,stage:morganStage,sessionId:morganSessionId,userEmail:morganUserEmail,firstName:morganFirstName,context:asstContext};const r=await fetch('/.netlify/functions/assistant',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});const d=await r.json();const reply=d.reply||'…';typing.innerHTML=mdInline(reply);convo.push({role:'assistant',content:reply});typing.scrollIntoView({behavior:'smooth',block:'start'});renderActions(d.actions)}catch(e){typing.textContent='Sorry — try again in a moment.'} }
+$('chatForm').addEventListener('submit',e=>{e.preventDefault();const v=$('chatInput').value;$('chatInput').value='';sendMsg(v)});
+$('suggest').addEventListener('click',e=>{const b=e.target.closest('button');if(b)sendMsg(b.getAttribute('data-q'))});
+
+(function(){
+  const member=Store.get('abc_member');
+  const profile=Store.get('abc_profile');
+  if(member){
+    morganStage=2;
+    morganUserEmail=emailFrom(member);
+    morganFirstName=firstNameFrom(member)||'Founder';
+    const first=morganFirstName;
+    asstContext=`Returning member.\nName: ${member.fullName||member.full_name||''}\nBusiness: ${member.businessName}\nStage: ${member.businessStage}\nReadiness: ${member.readinessScore}/100\nServices requested: ${(member.servicesNeeded||[]).join(', ')}\nPrior session context: ${member.agentContext||'(none recorded)'}`;
+    $('asstStatus').textContent='Welcome back — primed with your saved profile';
+    addMsg('bot',`Welcome back, ${first}. I have your profile. What would you like to work on today?`);
+  } else if(profile){
+    morganStage=1;
+    morganUserEmail=emailFrom(profile);
+    morganFirstName=firstNameFrom(profile)||'Founder';
+    const first=morganFirstName;
+    asstContext=`Business: ${profile.businessName}\nStage: ${profile.businessStage}\nReadiness score: ${profile.readiness?.total||''}/100\nMissing items: ${(profile.missingItems||[]).join(', ')}\nRecommended services: ${(profile.recommendedServices||[]).map(s=>s.label).join(', ')}\nPlan summary: ${String(profile.plan||'').slice(0,1800)}`;
+    $('asstStatus').textContent='Primed with your assessment for '+profile.businessName;
+    addMsg('bot',`Hello ${first}. Your assessment is ready and I have your full profile. What would you like to work on first?`);
+  } else {
+    morganStage=2;
+    morganUserEmail='';
+    morganFirstName='';
+    asstContext='';
+    $('asstStatus').textContent='Start your assessment or sign in to get personalized coaching';
+    addMsg('bot',`Hi — I'm Morgan. To tailor everything to your business, start your free assessment or sign in as a returning member.`);
+    renderActions([{label:'Start Free Business Assessment',href:'/assessment.html',kind:'included'},{label:'Returning Member Sign-In',href:'/resume.html',kind:'included'}]);
+  }
+})();
+</script>
+</body>
+</html>
