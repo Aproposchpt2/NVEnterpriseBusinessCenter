@@ -51,3 +51,13 @@ function resolveHref(href){
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',applyNebcHero); else applyNebcHero();
 })();
+
+// Footer platform language update.
+(function(){
+  function updateFooterPlatform(){
+    document.querySelectorAll('.footer-platform').forEach(function(el){
+      el.innerHTML='BUILT BY INNOVATIVE ENGINEERING INTELLIGENCE<br>POWERED BY ENTERPRISE TECHNOLGY OS';
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',updateFooterPlatform); else updateFooterPlatform();
+})();
