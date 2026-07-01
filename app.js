@@ -20,7 +20,7 @@ const Store = {
 function resolveHref(href){
   const h=String(href||'');
   if(/^https?:|^mailto:/i.test(h))return h;
-  if(h==='#assistant')return '/coach.html';
+  if(h==='#assistant')return '/morgans-office.html';
   if(h==='#documents')return '/documents.html';
   if(h==='#results'||h==='#start')return '/assessment.html';
   return h;
