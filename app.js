@@ -56,7 +56,7 @@ function resolveHref(href){
 (function(){
   function updateFooterPlatform(){
     document.querySelectorAll('.footer-platform').forEach(function(el){
-      el.innerHTML='BUILT BY INNOVATIVE ENGINEERING INTELLIGENCE<br>POWERED BY ENTERPRISE TECHNOLGY OS';
+      el.innerHTML='BUILT BY INNOVATIVE ENGINEERING INTELLIGENCE<br>POWERED BY ENTERPRISE TECHNOLOGY OS';
     });
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',updateFooterPlatform); else updateFooterPlatform();
