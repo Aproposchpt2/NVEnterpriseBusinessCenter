@@ -1,4 +1,4 @@
-// Apropos Business Center — shared front-end helpers (loaded on every page).
+﻿// Apropos Business Center — shared front-end helpers (loaded on every page).
 // Pure utilities only: no element lookups at load, so it is safe on any page.
 const $ = id => document.getElementById(id);
 
@@ -26,7 +26,7 @@ function resolveHref(href){
   return h;
 }
 
-// Nevada Enterprise Business Center homepage hero upgrade.
+// California Enterprise Business Center homepage hero upgrade.
 (function(){
   function applyNebcHero(){
     var home=location.pathname==='/' || /\/index\.html$/.test(location.pathname);
@@ -34,9 +34,9 @@ function resolveHref(href){
     var logo=document.querySelector('.top .logo');
     if(!home || !hero || !logo) return;
 
-    document.title='Nevada Enterprise Business Center — An Online Full-Service Business Center';
+    document.title='California Enterprise Business Center — An Online Full-Service Business Center';
     var meta=document.querySelector('meta[name="description"]');
-    if(meta) meta.content='Nevada Enterprise Business Center is an online full-service business center powered by AG ENGINEERING OS™.';
+    if(meta) meta.content='California Enterprise Business Center is an online full-service business center powered by AG ENGINEERING OS™.';
 
     if(!document.getElementById('nebc-hero-css')){
       var st=document.createElement('style');
@@ -45,9 +45,9 @@ function resolveHref(href){
       document.head.appendChild(st);
     }
 
-    logo.innerHTML='<span class="mk">N</span><span>Nevada Enterprise<br>Business Center</span>';
+    logo.innerHTML='<span class="mk">N</span><span>California Enterprise<br>Business Center</span>';
     hero.className='hero nebc-hero';
-    hero.innerHTML='<div class="wrap"><div class="nebc-hero-content"><span class="nebc-kicker">Your Partner in Business Success</span><h1>Nevada Enterprise<br>Business Center</h1><div class="nebc-subtitle">An Online Full-Service Business Center</div><p class="nebc-copy">Everything you need to start, manage, and grow your business — all in one place. Expert support. Powerful tools. Real opportunities.</p><p class="nebc-open-line">Always open. Always ready to serve — 24/7, 365 days a year.</p><div class="nebc-service-row"><div class="nebc-service"><span>▦</span>Business<br>Formation</div><div class="nebc-service"><span>◌</span>Business<br>Support</div><div class="nebc-service"><span>↗</span>Planning &amp;<br>Strategy</div><div class="nebc-service"><span>$</span>Funding<br>Resources</div><div class="nebc-service"><span>□</span>Contract<br>Opportunities</div><div class="nebc-service"><span>◎</span>Websites &amp;<br>Branding</div></div><div class="nebc-trust"><span>Expert Guidance</span><span>Fast &amp; Secure</span><span>All-in-One Platform</span><span>Trusted by Entrepreneurs</span></div><div class="cta-row"><a href="/assessment.html" class="btn btn-primary">Start Free Trial →</a><a href="/resume.html" class="btn btn-ghost">Member Login →</a></div><div class="nebc-no-card">No credit card required</div></div></div>';
+    hero.innerHTML='<div class="wrap"><div class="nebc-hero-content"><span class="nebc-kicker">Your Partner in Business Success</span><h1>California Enterprise<br>Business Center</h1><div class="nebc-subtitle">An Online Full-Service Business Center</div><p class="nebc-copy">Everything you need to start, manage, and grow your business — all in one place. Expert support. Powerful tools. Real opportunities.</p><p class="nebc-open-line">Always open. Always ready to serve — 24/7, 365 days a year.</p><div class="nebc-service-row"><div class="nebc-service"><span>▦</span>Business<br>Formation</div><div class="nebc-service"><span>◌</span>Business<br>Support</div><div class="nebc-service"><span>↗</span>Planning &amp;<br>Strategy</div><div class="nebc-service"><span>$</span>Funding<br>Resources</div><div class="nebc-service"><span>□</span>Contract<br>Opportunities</div><div class="nebc-service"><span>◎</span>Websites &amp;<br>Branding</div></div><div class="nebc-trust"><span>Expert Guidance</span><span>Fast &amp; Secure</span><span>All-in-One Platform</span><span>Trusted by Entrepreneurs</span></div><div class="cta-row"><a href="/assessment.html" class="btn btn-primary">Start Free Trial →</a><a href="/resume.html" class="btn btn-ghost">Member Login →</a></div><div class="nebc-no-card">No credit card required</div></div></div>';
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',applyNebcHero); else applyNebcHero();
 })();
