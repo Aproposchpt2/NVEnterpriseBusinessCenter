@@ -1,0 +1,61 @@
+name: Apply hero left enhancement
+
+on:
+  push:
+    paths:
+      - '.github/workflows/apply-hero-left-enhancement.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch-homepage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Move desktop hero content left
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('index.html')
+          html = path.read_text(encoding='utf-8')
+
+          marker = '/* hero-left-enhancement */'
+          insertion_point = '@media(max-width:1100px){'
+          enhancement = (
+              '/* hero-left-enhancement */'
+              '@media(min-width:981px){'
+              '.hero .wrap{max-width:none;margin:0;padding-left:clamp(24px,3.2vw,58px);padding-right:clamp(24px,2.5vw,48px)}'
+              '.hero-content{width:min(34vw,430px)}'
+              '}'
+          )
+
+          if marker in html:
+              print('Hero enhancement is already present; no duplicate added.')
+          else:
+              if insertion_point not in html:
+                  raise SystemExit('Expected responsive CSS insertion point was not found in index.html')
+              html = html.replace(insertion_point, enhancement + insertion_point, 1)
+              path.write_text(html, encoding='utf-8')
+              print('Desktop hero-left enhancement added.')
+          PY
+
+      - name: Commit homepage enhancement and remove temporary workflow
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/apply-hero-left-enhancement.yml
+          git add index.html
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "Move homepage hero content left to reveal image"
+          git push origin HEAD:main
