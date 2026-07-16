@@ -1,0 +1,76 @@
+name: Restore Nevada homepage
+
+on:
+  push:
+    paths:
+      - '.github/workflows/restore-nevada-homepage.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  restore-nevada:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out complete repository history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Restore Nevada-facing files
+        shell: bash
+        run: |
+          set -euo pipefail
+          SOURCE_COMMIT="b9064af82088f6118c3b51102ddf9dd3208a1b5c"
+          FILES=(
+            "app.js"
+            "assessment.html"
+            "documents.html"
+            "homepage-color-preview.html"
+            "homepage-flow-preview.html"
+            "index.html"
+            "subscription.html"
+          )
+
+          for file in "${FILES[@]}"; do
+            git show "${SOURCE_COMMIT}:${file}" > "${file}"
+          done
+
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('index.html')
+          html = path.read_text(encoding='utf-8')
+          marker = '/* hero-left-enhancement */'
+          insertion_point = '@media(max-width:1100px){'
+          enhancement = (
+              '/* hero-left-enhancement */'
+              '@media(min-width:981px){'
+              '.hero .wrap{max-width:none;margin:0;padding-left:clamp(24px,3.2vw,58px);padding-right:clamp(24px,2.5vw,48px)}'
+              '.hero-content{width:min(34vw,430px)}'
+              '}'
+          )
+
+          if marker not in html:
+              if insertion_point not in html:
+                  raise SystemExit('Expected Nevada responsive CSS insertion point was not found.')
+              html = html.replace(insertion_point, enhancement + insertion_point, 1)
+              path.write_text(html, encoding='utf-8')
+          PY
+
+          grep -q "Nevada Enterprise" index.html
+          if grep -q "California Enterprise" index.html; then
+            echo "California homepage identity remains in index.html"
+            exit 1
+          fi
+
+      - name: Commit restoration and remove temporary workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/restore-nevada-homepage.yml
+          git add app.js assessment.html documents.html homepage-color-preview.html homepage-flow-preview.html index.html subscription.html
+          git commit -m "Restore Nevada Business Center homepage and state defaults"
+          git push origin HEAD:main
