@@ -1,70 +1,68 @@
-// Apropos Message Horse — the in-house, set-and-forget messaging engine.
-// Each scheduled run selects an approved theme, generates an on-brand message,
-// and delivers it according to the controlled publishing mode.
+// Apropos Message Horse - controlled campaign publishing engine.
 //
-// MODE (env MESSAGE_HORSE_MODE):
-//   paused  — stop immediately; do not generate, email, or publish
-//   email   — generate and email for review
-//   post    — generate and publish to the Facebook Page
-//   both    — publish to Facebook and email the completed post
+// MESSAGE_HORSE_MODE:
+//   paused - stop immediately; do not generate, email, or publish
+//   email  - generate and email for review
+//   post   - generate and publish to the Facebook Page
+//   both   - publish to Facebook and email the completed post
 //
-// The function also supports ?dry=1 for a generation-only preview.
+// Add ?dry=1 for a generation-only preview.
 
 const FB_API = 'https://graph.facebook.com/v21.0';
-const SITE = 'https://aibizcenter.aproposgroupllc.com';
+const SITE = 'https://nevadaenterprise.org/';
 const VALID_MODES = new Set(['paused', 'email', 'post', 'both', 'preview']);
 
 const THEMES = [
   {
     key: 'business-center',
-    url: 'https://aibizcenter.aproposgroupllc.com',
+    url: 'https://nevadaenterprise.org/',
     hashtags: '#SmallBusiness #BusinessGrowth',
-    brief: 'The Apropos Business Center is a real, online, full-service business center that DOES the work instead of advising — it hands you the finished plan, documents, website, and the contracts. The whole business journey, start to grow, in one place.'
+    brief: 'The Apropos Business Center is a real online full-service business center that helps produce finished business plans, business documents, websites, and contract support. The business journey from startup through growth is available in one place.'
   },
   {
     key: 'contrast',
-    url: 'https://aibizcenter.aproposgroupllc.com',
+    url: 'https://nevadaenterprise.org/',
     hashtags: '#SmallBusiness #BusinessSupport',
-    brief: "What a government-funded business development center won't do — Apropos does. No costume, no smoke and mirrors: a self-funded federal contractor and licensed Nevada corporation, built to deliver real results, not host another class."
+    brief: 'Apropos provides practical business support built around useful deliverables, responsible guidance, and clear next steps rather than generic instruction alone.'
   },
   {
     key: 'contracts',
     url: 'https://nevadastategen.aproposgroupllc.com',
     hashtags: '#GovernmentContracting #SmallBusiness',
-    brief: 'Stop scrolling through endless pages of open and closed government contracts. StateGen brings the contracts to YOU — matched to your business, ranked, and ready to bid (Nevada and California live now).'
+    brief: 'StateGen helps businesses discover Nevada and California government contract opportunities that align with their capabilities, reducing the time spent searching scattered procurement sources.'
   },
   {
     key: 'capgen',
     url: 'https://capgen.aproposgroupllc.com',
     hashtags: '#BusinessDevelopment #SmallBusiness',
-    brief: 'CapGen builds your brand, your website, your content, and your proposals FOR you — not a blank template, the finished thing. The creation work, done.'
+    brief: 'CapGen supports business development through brand, website, content, opportunity intelligence, and proposal-development services designed around practical business needs.'
   },
   {
     key: 'opportunity',
-    url: 'https://aibizcenter.aproposgroupllc.com',
+    url: 'https://nevadaenterprise.org/',
     hashtags: '#BusinessOpportunity #SmallBusiness',
-    brief: 'We provide opportunity — the kind that leads to success. Find the money and programs you actually qualify for, matched to your situation, in minutes.'
+    brief: 'Apropos Group LLC helps businesses discover programs, resources, and government-marketplace opportunities that may align with their capabilities and stage of development.'
   },
   {
     key: 'documents',
-    url: 'https://aibizcenter.aproposgroupllc.com/#documents',
+    url: 'https://nevadaenterprise.org/#documents',
     hashtags: '#BusinessDocuments #SmallBusiness',
-    brief: 'Need an NDA, an LLC operating agreement, a service contract, or a clean invoice? Generate a real, ready-to-use business document in minutes — drafted for your business.'
+    brief: 'Businesses can prepare practical documents such as NDAs, operating agreements, service contracts, and invoices using information specific to their operations. Describe them as business documents, not legal documents or legal services.'
   },
   {
     key: 'free',
-    url: 'https://aibizcenter.aproposgroupllc.com/#start',
+    url: 'https://nevadaenterprise.org/#start',
     hashtags: '#SmallBusinessResources #SmallBusiness',
-    brief: 'Start FREE. Your tailored business plan, your business documents, and a 24/7 AI business assistant — free. We earn your business by delivering, not by charging at the door.'
+    brief: 'Businesses can begin with free planning resources, business-document tools, and business-assistance features before deciding which additional services fit their needs.'
   }
 ];
 
 function getEnv(name) {
   try {
-    const netlifyValue = globalThis.Netlify?.env?.get(name);
-    if (netlifyValue != null && netlifyValue !== '') return netlifyValue;
+    const value = globalThis.Netlify?.env?.get(name);
+    if (value != null && value !== '') return value;
   } catch (_) {
-    // Fall back to process.env for local development and legacy runtime support.
+    // Fall through for local development and legacy runtime support.
   }
   return process.env[name];
 }
@@ -72,7 +70,10 @@ function getEnv(name) {
 function jsonResponse(payload, status = 200) {
   return new Response(JSON.stringify(payload, null, 2), {
     status,
-    headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      'Cache-Control': 'no-store'
+    }
   });
 }
 
@@ -94,19 +95,21 @@ async function generateMessage(theme) {
 
   const prompt = `You write the Facebook post for an approved Apropos Group LLC campaign asset.
 
-Voice: confident, plain-spoken, useful, and credible. Never corporate-stiff, exaggerated, or spammy.
+Voice: confident, plain-spoken, useful, and credible. Never exaggerated, corporate-stiff, or spammy.
 
-Today's approved angle: ${theme.brief}
+Approved campaign angle: ${theme.brief}
 
 Write ONE Facebook post:
 - Begin with a strong first-line hook.
-- Use 1–3 short paragraphs focused on what the asset does for the business.
-- Include a clear call to action ending with this exact link: ${link}
+- Use 1-3 short paragraphs focused on what the asset does for a business.
+- End the call to action with this exact link: ${link}
 - End with these exact approved hashtags, in this order: ${theme.hashtags}
 - Do not add, replace, or invent hashtags.
+- Use the term business documents. Never claim Apropos provides legal documents, legal advice, or legal services.
 - Do not name or attack any organization.
 - Do not promise guaranteed business, funding, contracts, revenue, or outcomes.
-- Output only the ready-to-publish post text. No preamble and no quotation marks.`;
+- Use plain ASCII punctuation. Use a hyphen instead of an em dash.
+- Output only the ready-to-publish post text.`;
 
   const response = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
@@ -176,7 +179,7 @@ async function postToFacebook(message) {
     const context = await resolvePageContext(token, pageId);
     const response = await fetch(`${FB_API}/${context.id}/feed`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json; charset=utf-8' },
       body: JSON.stringify({ message, access_token: context.token })
     });
     const data = await response.json();
@@ -205,7 +208,7 @@ async function emailOwner(message, facebookResult) {
   }
 
   const status = facebookResult?.posted
-    ? 'Already posted to your Facebook Page — share it to your personal feed too.'
+    ? 'Already posted to your Facebook Page - share it to your personal feed too.'
     : 'Review and copy/paste this message when approved.';
 
   const escapedMessage = String(message)
@@ -214,7 +217,7 @@ async function emailOwner(message, facebookResult) {
     .replace(/>/g, '&gt;');
 
   const html = `<div style="font-family:Arial,sans-serif;max-width:640px;margin:0 auto;padding:24px;color:#10241c">
-    <div style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#c79a3e;font-weight:700;margin-bottom:10px">Apropos Message Horse · Campaign post</div>
+    <div style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#c79a3e;font-weight:700;margin-bottom:10px">Apropos Message Horse - Campaign post</div>
     <div style="font-size:13px;color:#3c5249;margin-bottom:16px">${status}</div>
     <div style="background:#fbf9f3;border:1px solid #e3ddcf;border-radius:12px;padding:20px;white-space:pre-wrap;font-size:15px;line-height:1.6">${escapedMessage}</div>
   </div>`;
@@ -224,12 +227,12 @@ async function emailOwner(message, facebookResult) {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${apiKey}`,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json; charset=utf-8'
       },
       body: JSON.stringify({
         from: sender,
         to: Array.isArray(recipient) ? recipient : [recipient],
-        subject: 'Apropos campaign post — ready to review',
+        subject: 'Apropos campaign post - ready to review',
         html
       })
     });
@@ -240,25 +243,23 @@ async function emailOwner(message, facebookResult) {
   }
 }
 
-export const config = { schedule: '0 15 * * *' }; // 15:00 UTC; approximately 8am Pacific during daylight time.
+export const config = { schedule: '0 15 * * *' };
 
 export default async request => {
   let dryRun = false;
   try {
     dryRun = new URL(request.url).searchParams.get('dry') === '1';
   } catch (_) {
-    // Scheduled invocation may not provide a conventional browser URL.
+    // Scheduled invocations may not provide a conventional browser URL.
   }
 
   const requestedMode = dryRun
     ? 'preview'
     : String(getEnv('MESSAGE_HORSE_MODE') || 'email').trim().toLowerCase();
 
-  // Fail closed for unknown values. An invalid mode must never publish.
   const mode = VALID_MODES.has(requestedMode) ? requestedMode : 'paused';
   const ran = new Date().toISOString();
 
-  // A true kill switch: no AI generation, email, or Facebook call occurs.
   if (mode === 'paused') {
     return jsonResponse({
       ran,
