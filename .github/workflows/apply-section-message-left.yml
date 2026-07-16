@@ -1,0 +1,41 @@
+name: Apply section message left alignment
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/apply-section-message-left.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Patch homepage section alignment
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          page = Path('index.html')
+          text = page.read_text(encoding='utf-8')
+          marker = '/* section-message-left-enhancement */'
+          css = marker + '@media(min-width:981px){.image-section>.wrap{max-width:none;margin:0;padding-left:clamp(24px,3.2vw,58px);padding-right:clamp(24px,2.5vw,48px)}}'
+          anchor = '/* hero-left-enhancement */'
+          if marker not in text:
+              if anchor not in text:
+                  raise SystemExit('Hero enhancement anchor not found in index.html')
+              text = text.replace(anchor, css + anchor, 1)
+              page.write_text(text, encoding='utf-8')
+          Path('.github/workflows/apply-section-message-left.yml').unlink()
+          PY
+      - name: Commit homepage update
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html .github/workflows/apply-section-message-left.yml
+          git commit -m 'Move Nevada section message blocks left to reveal images'
+          git push
